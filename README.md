@@ -16,4 +16,6 @@
 * Save your favorite theaters under your profile
 * Map out theaters and view ticket availability
 * We show you the fastest route to the theater.
+* Calculate the time to the movie theater, given the current location, and expected turnout
 * Purchase tickets from within app.
+* AMC Theaters only, cause Fandango will only give out their API to folks who can guarantee that usage of the API will increase revenue :'(
