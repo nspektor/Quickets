@@ -7,10 +7,10 @@
 ## Team Roles
 |Person            |Role           |
 |------------------|---------------|
-| Michael Mattson  |Frontend       |
-| Nellie Spektor   |Backend        |
-| Michael Rivera   |Middleware     |
-| Mariya Gedrich   |Stuff          |
+| Michael Mattson  |Frontend, pretty stuff       |
+| Nellie Spektor   |Backend, data stuff        |
+| Michael Rivera   |Middleware, ugly stuff     |
+| Mariya Gedrich   |Stuff, stuff          |
 
 ## Features
 * Login system
