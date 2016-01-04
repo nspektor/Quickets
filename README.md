@@ -10,6 +10,7 @@
 | Michael Mattson  |Frontend       |
 | Nellie Spektor   |Backend        |
 | Michael Rivera   |Middleware     |
+| Mariya Gedrich   |Stuff          |
 
 ## Features
 * Login system
@@ -19,3 +20,17 @@
 * Calculate the time to the movie theater, given the current location, and expected turnout
 * Purchase tickets from within app.
 * AMC Theaters only, cause Fandango will only give out their API to folks who can guarantee that usage of the API will increase revenue :'(
+
+## Timeline
+* 1/11/16: Login and frontend
+  * Login/Sign Up
+  * About w/o logging in
+  * Home dashboard
+  * Favorites list
+  * Visual representation of ticket data
+  * Map/Route calculator
+* 1/18/16: API working
+  * Route calculator
+  * Ticket data
+  * Upcoming movies
+* 1/24/16: Project done
