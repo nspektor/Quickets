@@ -13,12 +13,17 @@ def home():
  #       r = requests.post("https://api.amctheatres.com/v2/movies",data=payload)
   #      print r
 
-#@app.route("/login",methods=["GET","POST"])
-#def login():
- #   if request.method == "GET":
-  #      return render_template("login.html")
-   # else:
-        
+@app.route("/login", methods=["GET","POST"])
+@app.route("/login/", methods=["GET","POST"])
+def login():
+
+    return render_template("login.html")
+
+@app.route("/create/account", methods=["GET","POST"])
+@app.route("/create/account/", methods=["GET","POST"])
+def create_account():
+    return render_template("create_account.html")
+                                         
     
 if __name__=="__main__":
     app.debug = True
