@@ -10,17 +10,38 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
  <body>
+   <nav class="navbar navbar-inverse">
+     <div class="container-fluid">
+       <div class="navbar-header">
+	 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>                        
+	 </button>
+	 <a class="navbar-brand" href="#">Quickets</a>
+       </div>
+       <div class="collapse navbar-collapse" id="myNavbar">
+	 <ul class="nav navbar-nav">
+           <li class="active"><a href="/home">Home</a></li>   
+           <li class="active"><a href="/edit_account">Edit Account</a></li>   
+	 </ul>
+	 <ul class="nav navbar-nav navbar-right">
+           <li><a href="/create_account"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+           <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	 </ul>
+       </div>
+     </div>
+   </nav>
    <div class="container">
      <div class="jumbotron">
        <center>
        <h1>Welcome to Quickets</h1>
        <h2>Last minute tickets!</h2>
-       <form action="/login">
-           <input type="submit" value="login">
-       </form>
-       <form action="/create/account">
-           <input type="submit" value="create an account">
-        </form>
+       <p> 1st recommended movie </p>
+       <a href="/find_ticket" class="btn btn-info" role="button">Watch Now!</a>
+       <a href="/find_ticket" class="btn btn-info" role="button">Watch Now!</a>
+       <a href="/find_ticket" class="btn btn-info" role="button">Watch Now!</a>
+
        </center>
      </div>
    </div>
