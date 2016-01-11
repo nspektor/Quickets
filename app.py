@@ -16,13 +16,17 @@ def home():
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
-
     return render_template("login.html")
 
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
 def create_account():
     return render_template("create_account.html")
+
+@app.route("/find_tickets", methods=["GET","POST"])
+@app.route("/find_tickets/", methods=["GET","POST"])
+def find_tickets():
+    return render_template("find_tickets.html")
                                          
     
 if __name__=="__main__":
