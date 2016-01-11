@@ -36,7 +36,7 @@ def getTheatresPlayingMovie(wwm):
     return theatreList
 
 def getNearbyTheatres(postalCode):
-    link='https://api.amctheatres.com/v2/theatres'
+    link='https://api.amctheatres.com/v2/theatres?state=new-york'
     global headers
     r=requests.get(link, headers=headers)
     q=r.json()
@@ -44,9 +44,12 @@ def getNearbyTheatres(postalCode):
     print theatreData[0].keys()
     global nearbyTheatres
     for theatre in theatreData:
-        print theatre.keys()
-        nearbyTheatres.append(theatre['westWorldMediaNumber'])
-    #print nearbyTheatres
+        print theatre['location']
+        try:
+            nearbyTheatres.append(theatre['westWorldMediaNumber'])
+        except KeyError:
+            print "This theatre is a butt"
+    print nearbyTheatres
 
 def getTheatreShowtimes(theatreNo, movieTitle):
     rn=datetime.datetime.now()
