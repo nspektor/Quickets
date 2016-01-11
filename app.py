@@ -19,8 +19,8 @@ def login():
 
     return render_template("login.html")
 
-@app.route("/create/account", methods=["GET","POST"])
-@app.route("/create/account/", methods=["GET","POST"])
+@app.route("/create_account", methods=["GET","POST"])
+@app.route("/create_account/", methods=["GET","POST"])
 def create_account():
     return render_template("create_account.html")
                                          
