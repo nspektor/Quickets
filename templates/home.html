@@ -1,28 +1,17 @@
-<!DOCTYPE html>
-<html>
- <head>
-<head>
-  <title>Quickets</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
- <body>
-   <div class="container">
-     <div class="jumbotron">
-       <center>
-       <h1>Welcome to Quickets</h1>
-       <h2>Last minute tickets!</h2>
-       <form action="/login">
-           <input type="submit" value="login">
-       </form>
-       <form action="/create/account">
-           <input type="submit" value="create an account">
-        </form>
-       </center>
-     </div>
-   </div>
- </body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Quickets{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <center>
+      <h1>Welcome to Quickets</h1>
+      <h2>Last minute tickets!</h2>
+      <p> 1st recommended movie </p>
+      <a href="/find_tickets" class="btn btn-info" role="button">Watch Now!</a>
+      <a href="/home" class="btn btn-info" role="button">Maybe Later</a>
+      <a href="/home" class="btn btn-info" role="button">Nope</a>
+       
+    </center>
+  </div>
+</div>
+{% endblock %}
