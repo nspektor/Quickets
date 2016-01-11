@@ -12,7 +12,7 @@ ticket availability
 ordering tickets
 '''
 
-#returns list of dictionary entries of currently playing movies in format {name:wwmReleaseNumber}. format is temporary tho
+#returns list of dictionary entries of currently playing movies in format {name:name, wwmRN:wwmReleaseNumber}. format is temporary tho
 def getNowPlaying():
     global headers
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
@@ -20,7 +20,7 @@ def getNowPlaying():
     movieData=q['_embedded']['movies']
     movieList=[]
     for movie in movieData:
-        movieList.append({movie['name']:movie['wwmReleaseNumber']})
+        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber']})
     return movieList
 
 #returns list of theatre ids of theatres currently playing movie of a specific wwmReleaseNumber
@@ -35,5 +35,19 @@ def getTheatresPlayingMovie(wwm):
         theatreList.append(theatre['id'])
     return theatreList
 
+def getTheatreShowtimes(theatreNo, movieTitle):
+    rn=datetime.datetime.now()
+    date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
+    titleList=movieTitle.split(' ')
+    name=titleList[-1]
+    link='https://api.amctheatres.com/v2/theatres/%d/showtimes/%s/?movie=%s' % (theatreNo, date, name)
+    global headers
+    r=requests.get(link, headers=headers)
+    q=r.json()
+    showtimeData=q['_embedded']['showtimes']
+    #print showtimeData[0].keys()
+    print showtimeData[0]['showDateTimeLocal']
+    
 movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 getTheatresPlayingMovie(movieno)
+getTheatreShowtimes(610, 'The Danish girl')
