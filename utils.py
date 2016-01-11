@@ -2,7 +2,7 @@ import requests
 import datetime
 
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
-
+nearbyTheatres=[] #list of nearby theatre wwm numbers
 '''
 -list of current movies
 list of showtimes for those movies
@@ -35,6 +35,19 @@ def getTheatresPlayingMovie(wwm):
         theatreList.append(theatre['id'])
     return theatreList
 
+def getNearbyTheatres(postalCode):
+    link='https://api.amctheatres.com/v2/theatres'
+    global headers
+    r=requests.get(link, headers=headers)
+    q=r.json()
+    theatreData=q['_embedded']['theatres']
+    print theatreData[0].keys()
+    global nearbyTheatres
+    for theatre in theatreData:
+        print theatre.keys()
+        nearbyTheatres.append(theatre['westWorldMediaNumber'])
+    #print nearbyTheatres
+
 def getTheatreShowtimes(theatreNo, movieTitle):
     rn=datetime.datetime.now()
     date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
@@ -46,8 +59,10 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     q=r.json()
     showtimeData=q['_embedded']['showtimes']
     #print showtimeData[0].keys()
-    print showtimeData[0]['showDateTimeLocal']
+    #for i in showtimeData:
+        #print i['showDateTimeLocal']
     
 movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 getTheatresPlayingMovie(movieno)
-getTheatreShowtimes(610, 'The Danish girl')
+#getTheatreShowtimes(610, 'The Danish girl')
+getNearbyTheatres(10282)
