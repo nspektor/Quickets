@@ -23,6 +23,11 @@ def login():
 def create_account():
     return render_template("create_account.html")
 
+@app.route("/edit_account", methods=["GET","POST"])
+@app.route("/edit_account/", methods=["GET","POST"])
+def edit_account():
+    return render_template("edit_account.html")
+
 @app.route("/find_tickets", methods=["GET","POST"])
 @app.route("/find_tickets/", methods=["GET","POST"])
 def find_tickets():
