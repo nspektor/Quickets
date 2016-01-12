@@ -2,7 +2,8 @@ import requests
 import datetime
 
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
-nearbyTheatres=[] #list of nearby theatre wwm numbers
+stateTheatres=[] #list of nearby theatre wwm numbers
+zipTheatres=[]
 '''
 -list of current movies
 list of showtimes for those movies
@@ -35,22 +36,28 @@ def getTheatresPlayingMovie(wwm):
         theatreList.append(theatre['id'])
     return theatreList
 
-def getNearbyTheatres(postalCode):
-    link='https://api.amctheatres.com/v2/theatres?state=new-york'
+def getZipTheatres(state, postalCode):
+    link='https://api.amctheatres.com/v2/theatres?page-size=100&state=%s'
+    link=link % (state)
     global headers
     r=requests.get(link, headers=headers)
     q=r.json()
     theatreData=q['_embedded']['theatres']
     print theatreData[0].keys()
-    global nearbyTheatres
+    global stateTheatres
     for theatre in theatreData:
-        print theatre['location']
+        #print theatre['slug']
         try:
-            nearbyTheatres.append(theatre['westWorldMediaNumber'])
+            state.append(theatre)
+            print theatre['location']['state']
         except KeyError:
             print "This theatre is a butt"
-    print nearbyTheatres
-
+    print len(stateTheatres)
+    print stateTheatres
+    global zipTheatres
+    for theatre in stateTheatres:
+        if theatre['location']['postalCode'][0,2]==postalCode[0,2]:
+            zipTheatres.append(theatre
 def getTheatreShowtimes(theatreNo, movieTitle):
     rn=datetime.datetime.now()
     date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
@@ -65,7 +72,7 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     #for i in showtimeData:
         #print i['showDateTimeLocal']
     
-movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
-getTheatresPlayingMovie(movieno)
+#movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
+#getTheatresPlayingMovie(movieno)
 #getTheatreShowtimes(610, 'The Danish girl')
-getNearbyTheatres(10282)
+getNearbyTheatres('new-york', 10282)
