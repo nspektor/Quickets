@@ -1,5 +1,6 @@
 import urllib2,json
 from flask import Flask, render_template, session, request, redirect, url_for
+from database import *
 
 app = Flask(__name__)
 
@@ -16,15 +17,24 @@ def home():
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
-
     return render_template("login.html")
 
-@app.route("/create/account", methods=["GET","POST"])
-@app.route("/create/account/", methods=["GET","POST"])
+@app.route("/create_account", methods=["GET","POST"])
+@app.route("/create_account/", methods=["GET","POST"])
 def create_account():
     return render_template("create_account.html")
-                                         
-    
+
+@app.route("/edit_account", methods=["GET","POST"])
+@app.route("/edit_account/", methods=["GET","POST"])
+def edit_account():
+    return render_template("edit_account.html")
+
+@app.route("/find_tickets", methods=["GET","POST"])
+@app.route("/find_tickets/", methods=["GET","POST"])
+def find_tickets():
+    return render_template("find_tickets.html")
+
+
 if __name__=="__main__":
     app.debug = True
     app.run(host='0.0.0.0',port=8000)
