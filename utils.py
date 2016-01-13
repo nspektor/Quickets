@@ -44,22 +44,22 @@ def getZipTheatres(state, postalCode):
     r=requests.get(link, headers=headers)
     q=r.json()
     theatreData=q['_embedded']['theatres']
-    print theatreData[0].keys()
+    #print theatreData[0].keys()
     global stateTheatres
     for theatre in theatreData:
         #print theatre['slug']
         try:
             stateTheatres.append(theatre)
-            print theatre['location']['state']
+            #print theatre['location']['state']
         except KeyError:
             print "This theatre is a butt"
-    print len(stateTheatres)
-    nearbyZips=getNearbyZips(postalCode, 5)
-    print stateTheatres
+   # print len(stateTheatres)
+    nearbyZips=getNearbyZips(postalCode, 10)
+    #print stateTheatres
     global zipTheatres
     for theatre in stateTheatres:
         if '-' in theatre['location']['postalCode']:
-            print theatre['location']['postalCode']
+            #print theatre['location']['postalCode']
             tZip=theatre['location']['postalCode'].split('-')[0]
             print tZip
         else:
@@ -69,6 +69,7 @@ def getZipTheatres(state, postalCode):
             try:
                 print 'nearbyZips contains '+theatre['location']['postalCode']
                 zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
+                print zipTheatres
             except KeyError:
                 print "This theatre is a butt again, at "+theatre['location']['postalCode']
     print zipTheatres
@@ -78,7 +79,7 @@ def getNearbyZips(postalCode, radius):
     link = link % (postalCode, radius)
     r=requests.get(link)
     q=r.json()
-    print q.keys()
+    #print q.keys()
     #print q['error_msg']
     zipData=q['zip_codes']
     zipList=[]
@@ -109,4 +110,4 @@ def getTheatreShowtimes(theatreNo, movieTitle):
 #getTheatreShowtimes(610, 'The Danish girl')
 
 #getNearbyZips(10282, 5)
-getZipTheatres('new-york', 10282)
+getZipTheatres('new-york', 11229)
