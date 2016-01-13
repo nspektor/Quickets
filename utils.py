@@ -4,6 +4,7 @@ import datetime
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
 stateTheatres=[] #list of nearby theatre wwm numbers
 zipTheatres=[]
+#nearbyZips=[]
 '''
 -list of current movies
 list of showtimes for those movies
@@ -48,16 +49,47 @@ def getZipTheatres(state, postalCode):
     for theatre in theatreData:
         #print theatre['slug']
         try:
-            state.append(theatre)
+            stateTheatres.append(theatre)
             print theatre['location']['state']
         except KeyError:
             print "This theatre is a butt"
     print len(stateTheatres)
+    nearbyZips=getNearbyZips(postalCode, 5)
     print stateTheatres
     global zipTheatres
     for theatre in stateTheatres:
-        if theatre['location']['postalCode'][0,2]==postalCode[0,2]:
-            zipTheatres.append(theatre
+        if '-' in theatre['location']['postalCode']:
+            print theatre['location']['postalCode']
+            tZip=theatre['location']['postalCode'].split('-')[0]
+            print tZip
+        else:
+            tzip=theatre['location']['postalCode']
+        #print theatre['location']['postalCode']
+        if theatre['location']['postalCode'] in nearbyZips:
+            try:
+                print 'nearbyZips contains '+theatre['location']['postalCode']
+                zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
+            except KeyError:
+                print "This theatre is a butt again, at "+theatre['location']['postalCode']
+    print zipTheatres
+
+def getNearbyZips(postalCode, radius):
+    link='https://www.zipcodeapi.com/rest/XhcSg7FLPZcNBWPWCEfwKhmDQMea9IL7ZXZg5F1UEeHfbxcOcrkWJHAAtPKDxvKw/radius.json/%d/%d/mile'
+    link = link % (postalCode, radius)
+    r=requests.get(link)
+    q=r.json()
+    print q.keys()
+    #print q['error_msg']
+    zipData=q['zip_codes']
+    zipList=[]
+    for zipper in zipData:
+        zipList.append(zipper['zip_code'])
+    #global nearbyZips
+    #nearbyZips=zipList
+    return zipList
+    #print nearbyZips
+    
+    
 def getTheatreShowtimes(theatreNo, movieTitle):
     rn=datetime.datetime.now()
     date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
@@ -75,4 +107,6 @@ def getTheatreShowtimes(theatreNo, movieTitle):
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 #getTheatresPlayingMovie(movieno)
 #getTheatreShowtimes(610, 'The Danish girl')
-getNearbyTheatres('new-york', 10282)
+
+#getNearbyZips(10282, 5)
+getZipTheatres('new-york', 10282)
