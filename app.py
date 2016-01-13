@@ -1,4 +1,5 @@
 import urllib2,json
+import hashlib
 from flask import Flask, render_template, session, request, redirect, url_for
 from database import *
 
@@ -22,7 +23,30 @@ def login():
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
 def create_account():
-    return render_template("create_account.html")
+    if request.method == "GET":
+        return render_template("create_account.html")
+    else:
+        username = request.form['username']
+        password = request.form['password']
+
+        if " " in username or "\t" in username:
+            error = "You cannot have spaces in your username!"
+            return render_template("create_account.html", err = error, s = session)
+        if (password == ""):
+            error = "You cannot have no password!"
+            return render_template("create_account.html", err = error, s = session)
+        if " " in password or "\t" in password:
+            error = "You cannot have spaces in your password!"
+            return render_template("create_account.html", err = error, s = session)
+        m = hashlib.md5()
+        m.update(password)
+        passhash = m.hexdigest()
+        if (newUser(username, passhash)):
+            smsg = "You will be redirected to the log-in page in a moment."
+            return render_template("login.html", success = smsg, s = session);
+
+        error = "Username already in use!"
+        return render_template("create_account.html", err = error, s = session)
 
 @app.route("/edit_account", methods=["GET","POST"])
 @app.route("/edit_account/", methods=["GET","POST"])
