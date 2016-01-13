@@ -59,19 +59,22 @@ def getZipTheatres(state, postalCode):
     global zipTheatres
     for theatre in stateTheatres:
         if '-' in theatre['location']['postalCode']:
-            #print theatre['location']['postalCode']
+            print theatre['location']['postalCode']
             tZip=theatre['location']['postalCode'].split('-')[0]
             print tZip
         else:
             tzip=theatre['location']['postalCode']
         #print theatre['location']['postalCode']
         if theatre['location']['postalCode'] in nearbyZips:
-            try:
+            if 'westWorldMediaTheatreNumber' in theatre.keys():
+                print 'nearbyZips contains '+theatre['location']['postalCode']
+                zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
+            '''try:
                 print 'nearbyZips contains '+theatre['location']['postalCode']
                 zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
                 print zipTheatres
             except KeyError:
-                print "This theatre is a butt again, at "+theatre['location']['postalCode']
+                print "This theatre is a butt again, at "+theatre['location']['postalCode']'''
     print zipTheatres
 
 def getNearbyZips(postalCode, radius):
