@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Create Account{% endblock %}
+{% block content %}
+<div class="container">
+  <h2>Create an account</h2>
+  {% if err %}
+  <h3> {{err}} </h3>
+  {% endif %}
+  <form role="form" method="POST">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+    <div class="form-group">
+      <label for="pwdagn">Confirm Password:</label>
+      <input type="password" name="password_again" class="form-control" id="pwdagn" placeholder="Retype password">
+    </div>
+    <button type="submit" name="button" class="btn btn-default">Create</button>
+    
+    <a href="/home"  class="btn btn-default" >Cancel</a>
+    
+  </form>
+</div>
+{% endblock %}
