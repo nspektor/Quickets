@@ -113,4 +113,4 @@ def getTheatreShowtimes(theatreNo, movieTitle):
 #getTheatreShowtimes(610, 'The Danish girl')
 
 #getNearbyZips(10282, 5)
-getZipTheatres('new-york', 11229)
+getZipTheatres('new-york', 10011)
