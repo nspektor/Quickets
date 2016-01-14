@@ -110,6 +110,18 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     #print showtimeData[0].keys()
     #for i in showtimeData:
         #print i['showDateTimeLocal']
+
+        
+def getMovieAvailability(theatreNo, movieTitle):
+    rn=datetime.datetime.now()
+    date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
+    titleList=movieTitle.split(' ')
+    name=titleList[-1]
+    link='https://api.amctheatres.com/v2/theatres/%d/showtimes/%s/?movie=%s' % (theatreNo, date, name)
+    global headers
+    r=requests.get(link, headers=headers)
+    q=r.json()
+    print q.keys()
     
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 #getTheatresPlayingMovie(movieno)
@@ -121,4 +133,4 @@ testMovie=getNowPlaying()[0]
 print testMovie
 theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 print theatresPM
-getTheatreShowtimes(theatreNo[0], testMovie['title'])
+#getTheatreShowtimes(theatreNo[0], testMovie['title'])
