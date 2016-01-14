@@ -14,15 +14,16 @@ ticket availability
 ordering tickets
 '''
 
-#returns list of dictionary entries of currently playing movies in format {name:name, wwmRN:wwmReleaseNumber}. format is temporary tho
+#returns list of dictionary entries of currently playing movies in format {name:name, wwmRN:wwmReleaseNumber, id: id}. format is temporary tho
 def getNowPlaying():
     global headers
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
     q=r.json()
     movieData=q['_embedded']['movies']
+    print movieData[0].keys()
     movieList=[]
     for movie in movieData:
-        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber']})
+        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id']})
     return movieList
 
 #returns list of theatre ids of theatres currently playing movie of a specific wwmReleaseNumber
@@ -30,6 +31,7 @@ def getTheatresPlayingMovie(wwm):
     global headers
     link="https://api.amctheatres.com/v2/theatres/views/now-playing/wwm-release-number/"+str(wwm)
     r=requests.get(link, headers=headers)
+    print r
     q=r.json()
     theatreData=q['_embedded']['theatres']
     theatreList=[]
@@ -104,6 +106,7 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     r=requests.get(link, headers=headers)
     q=r.json()
     showtimeData=q['_embedded']['showtimes']
+    print showtimeData[0].keys()
     #print showtimeData[0].keys()
     #for i in showtimeData:
         #print i['showDateTimeLocal']
@@ -113,4 +116,9 @@ def getTheatreShowtimes(theatreNo, movieTitle):
 #getTheatreShowtimes(610, 'The Danish girl')
 
 #getNearbyZips(10282, 5)
-getZipTheatres('new-york', 10011)
+#getZipTheatres('new-york', 10011)
+testMovie=getNowPlaying()[0]
+print testMovie
+theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
+print theatresPM
+getTheatreShowtimes(theatreNo[0], testMovie['title'])
