@@ -49,6 +49,7 @@ def getZipTheatres(state, postalCode):
     for theatre in theatreData:
         #print theatre['slug']
         try:
+            #print theatre['name']
             stateTheatres.append(theatre)
             #print theatre['location']['state']
         except KeyError:
@@ -58,20 +59,19 @@ def getZipTheatres(state, postalCode):
     #print stateTheatres
     global zipTheatres
     for theatre in stateTheatres:
-        if '-' in theatre['location']['postalCode']:
-            print theatre['location']['postalCode']
-            tZip=theatre['location']['postalCode'].split('-')[0]
-            print tZip
-        else:
-            tzip=theatre['location']['postalCode']
+        tZip=theatre['location']['postalCode'].split('-')[0]
+        #print tZip
         #print theatre['location']['postalCode']
-        if theatre['location']['postalCode'] in nearbyZips:
-            if 'westWorldMediaTheatreNumber' in theatre.keys():
+        if tZip in nearbyZips:
+            print theatre['name']
+            print tZip
+            #print theatre.keys()
+            if 'westWorldMediaNumber' in theatre.keys():
                 print 'nearbyZips contains '+theatre['location']['postalCode']
-                zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
+                zipTheatres.append(theatre['westWorldMediaNumber'])
             '''try:
                 print 'nearbyZips contains '+theatre['location']['postalCode']
-                zipTheatres.append(theatre['westWorldMediaTheatreNumber'])
+                zipTheatres.append(theatre['westWorldMediaNumber'])
                 print zipTheatres
             except KeyError:
                 print "This theatre is a butt again, at "+theatre['location']['postalCode']'''
