@@ -121,7 +121,18 @@ def getMovieAvailability(theatreNo, movieTitle):
     global headers
     r=requests.get(link, headers=headers)
     q=r.json()
-    print q.keys()
+    #print "\n"
+    #print q
+    #print q.keys()
+    p = q['_embedded']
+    #print p.keys()
+    l = p['showtimes']
+    p = []
+    for asdf in l:
+        if(not asdf['isSoldOut']):
+            p.append(asdf['showDateTimeLocal'])
+    print p
+    return p
     
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 #getTheatresPlayingMovie(movieno)
@@ -133,4 +144,4 @@ testMovie=getNowPlaying()[0]
 print testMovie
 theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 print theatresPM
-#getTheatreShowtimes(theatreNo[0], testMovie['title'])
+getMovieAvailability(theatresPM[0], testMovie['name'])
