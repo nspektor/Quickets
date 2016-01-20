@@ -26,7 +26,7 @@ def buyTickets():
     print p.reason
     #print sku
     
-buyTickets()
+#buyTickets()
 
 '''
 returns list of movies currently playing in theatres, as a list of dictionaries
@@ -39,12 +39,15 @@ def getNowPlaying():
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
     q=r.json()
     movieData=q['_embedded']['movies']
-    print movieData[0].keys()
+    #print movieData[0].keys()
+    #print movieData[0]['media']
     movieList=[]
     for movie in movieData:
-        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id']})
+        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge']})
+    print movieList[0]['name']
+    print movieList[0]['poster']
     return movieList
-
+getNowPlaying()
 
 '''
 takes movie's wwm number
