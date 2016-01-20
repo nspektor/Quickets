@@ -10,12 +10,28 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
         return render_template("home.html")
-    else:
-        
+
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
-    return render_template("login.html")
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        username = request.form['username']
+        password = request.form['password']
+
+        m = hashlib.md5()
+        m.update(password)
+        passhash = m.hexdigest()
+
+        if authenticate(username, passhash):
+
+            session["username"] = username
+            return redirect(url_for("home", username = username))
+        else:
+            error = "Invalid username and password combination"
+            return render_template("login.html", err = error, s = session)
+
 
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
@@ -58,6 +74,7 @@ def find_tickets():
 
 if __name__=="__main__":
     app.debug = True
+    app.secret_key = "lolsup"
     app.run(host='0.0.0.0',port=8000)
 
 
