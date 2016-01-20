@@ -47,7 +47,7 @@ def getNowPlaying():
     print movieList[0]['name']
     print movieList[0]['poster']
     return movieList
-getNowPlaying()
+#getNowPlaying()
 
 '''
 takes movie's wwm number
@@ -134,8 +134,11 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     showtimeData=q['_embedded']['showtimes']
     print showtimeData[0].keys()
     #print showtimeData[0].keys()
-    #for i in showtimeData:
-        #print i['showDateTimeLocal']
+    p = []
+    for i in showtimeData:
+        print i['showDateTimeLocal']
+        p.append(i['showDateTimeLocal'])
+    return p
 
         
 def getMovieAvailability(theatreNo, movieTitle):
@@ -162,7 +165,7 @@ def getMovieAvailability(theatreNo, movieTitle):
     
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 #getTheatresPlayingMovie(movieno)
-#getTheatreShowtimes(610, 'The Danish girl')
+getTheatreShowtimes(610, 'The Danish girl')
 
 #getNearbyZips(10282, 5)
 #getZipTheatres('new-york', 10011)
