@@ -8,13 +8,10 @@ app = Flask(__name__)
 @app.route("/",methods=["GET","POST"])
 @app.route("/home",methods=["GET","POST"])
 def home():
-   # if request.method == "GET":
-    return render_template("home.html")
-#    else:
- #       payload = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
- #       r = requests.post("https://api.amctheatres.com/v2/movies",data=payload)
-  #      print r
-
+    if request.method == "GET":
+        return render_template("home.html")
+    else:
+        
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
