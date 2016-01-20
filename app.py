@@ -2,6 +2,7 @@ import urllib2,json
 import hashlib
 from flask import Flask, render_template, session, request, redirect, url_for
 from database import *
+import utils
 
 app = Flask(__name__)
 
@@ -10,6 +11,18 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
         return render_template("home.html")
+    else:
+        loggedin = False
+        if 'username' in session:
+            loggedin = True
+            username = session['username']
+        movies = utils.getNowPlaying()
+        movieimages = []
+        movienames = []
+        for i in movies:
+            movienames.append(i['name'])
+            movieimages.append(i['poster'])
+        return render_template("home.html",loggedin=loggedin,movieimages=movieimages,movienames=movienames)
 
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
