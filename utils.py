@@ -2,8 +2,8 @@ import requests
 import datetime
 
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
-stateTheatres=[] #list of nearby theatre wwm numbers
-zipTheatres=[]
+#stateTheatres=[] #list of nearby theatre wwm numbers
+#zipTheatres=[]
 #nearbyZips=[]
 '''
 -list of current movies
@@ -16,8 +16,9 @@ ordering tickets
 
 def buyTickets():
     global headers
-    r=requests.get("https://api.amctheatres.com/v2/theatres/610/showtimes/01-19-2016",headers=headers)
+    r=requests.get("https://api.amctheatres.com/v2/theatres/610/showtimes/01-20-2016",headers=headers)
     q=r.json()
+    #print q
     showtimeData=q['_embedded']['showtimes']
     showtime=showtimeData[0]
     sku=showtime['ticketPrices'][0]['sku']
@@ -26,7 +27,13 @@ def buyTickets():
     #print sku
     
 buyTickets()
-#returns list of dictionary entries of currently playing movies in format {name:name, wwmRN:wwmReleaseNumber, id: id}. format is temporary tho
+
+'''
+returns list of movies currently playing in theatres, as a list of dictionaries
+format:
+   {'name': movie name, 'wwmRN': movie's wwmReleaseNumber, 'id': movie's id}
+
+'''
 def getNowPlaying():
     global headers
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
@@ -38,7 +45,13 @@ def getNowPlaying():
         movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id']})
     return movieList
 
-#returns list of theatre ids of theatres currently playing movie of a specific wwmReleaseNumber
+
+'''
+takes movie's wwm number
+returns list of theatre ids of theatres playing that movie
+to be used with getZipTheatres to get theatres playing certain movie near person's location
+also returns value for use by getTheatreShowtimes and getMovieAvailability
+'''
 def getTheatresPlayingMovie(wwm):
     global headers
     link="https://api.amctheatres.com/v2/theatres/views/now-playing/wwm-release-number/"+str(wwm)
@@ -51,6 +64,12 @@ def getTheatresPlayingMovie(wwm):
         theatreList.append(theatre['id'])
     return theatreList
 
+'''
+takes state and postal code
+returns list of wwm numbers for theatres within certain radius of zipcode in that state
+uses state for initial api call to find all theatres in a state
+uses postalcode for getNearbyZips
+'''
 def getZipTheatres(state, postalCode):
     link='https://api.amctheatres.com/v2/theatres?page-size=100&state=%s'
     link=link % (state)
@@ -58,20 +77,13 @@ def getZipTheatres(state, postalCode):
     r=requests.get(link, headers=headers)
     q=r.json()
     theatreData=q['_embedded']['theatres']
-    #print theatreData[0].keys()
-    global stateTheatres
+    stateTheatres=[]
     for theatre in theatreData:
-        #print theatre['slug']
         try:
-            #print theatre['name']
             stateTheatres.append(theatre)
-            #print theatre['location']['state']
         except KeyError:
             print "This theatre is a butt"
-   # print len(stateTheatres)
     nearbyZips=getNearbyZips(postalCode, 10)
-    #print stateTheatres
-    global zipTheatres
     for theatre in stateTheatres:
         tZip=theatre['location']['postalCode'].split('-')[0]
         #print tZip
@@ -83,14 +95,13 @@ def getZipTheatres(state, postalCode):
             if 'westWorldMediaNumber' in theatre.keys():
                 print 'nearbyZips contains '+theatre['location']['postalCode']
                 zipTheatres.append(theatre['westWorldMediaNumber'])
-            '''try:
-                print 'nearbyZips contains '+theatre['location']['postalCode']
-                zipTheatres.append(theatre['westWorldMediaNumber'])
-                print zipTheatres
-            except KeyError:
-                print "This theatre is a butt again, at "+theatre['location']['postalCode']'''
-    print zipTheatres
+        return zipTheatres
 
+'''
+takes a postal code and radius
+returns list of zipcodes in that radius
+to be used to find nearby theatres in getZipTheatres
+'''
 def getNearbyZips(postalCode, radius):
     link='https://www.zipcodeapi.com/rest/XhcSg7FLPZcNBWPWCEfwKhmDQMea9IL7ZXZg5F1UEeHfbxcOcrkWJHAAtPKDxvKw/radius.json/%d/%d/mile'
     link = link % (postalCode, radius)
