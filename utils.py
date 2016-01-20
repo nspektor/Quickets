@@ -14,6 +14,18 @@ ticket availability
 ordering tickets
 '''
 
+def buyTickets():
+    global headers
+    r=requests.get("https://api.amctheatres.com/v2/theatres/610/showtimes/01-19-2016",headers=headers)
+    q=r.json()
+    showtimeData=q['_embedded']['showtimes']
+    showtime=showtimeData[0]
+    sku=showtime['ticketPrices'][0]['sku']
+    p=requests.post('https://api.amctheatres.com/v2/orders', headers=headers)
+    print p.reason
+    #print sku
+    
+buyTickets()
 #returns list of dictionary entries of currently playing movies in format {name:name, wwmRN:wwmReleaseNumber, id: id}. format is temporary tho
 def getNowPlaying():
     global headers
@@ -140,8 +152,8 @@ def getMovieAvailability(theatreNo, movieTitle):
 
 #getNearbyZips(10282, 5)
 #getZipTheatres('new-york', 10011)
-testMovie=getNowPlaying()[0]
-print testMovie
-theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
-print theatresPM
-getMovieAvailability(theatresPM[0], testMovie['name'])
+#testMovie=getNowPlaying()[0]
+#print testMovie
+#theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
+#print theatresPM
+#getMovieAvailability(theatresPM[0], testMovie['name'])
