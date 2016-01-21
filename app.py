@@ -10,8 +10,6 @@ app = Flask(__name__)
 @app.route("/home",methods=["GET","POST"])
 def home():
     if request.method == "GET":
-        return render_template("home.html")
-    else:
         loggedin = False
         if 'username' in session:
             loggedin = True
@@ -23,7 +21,17 @@ def home():
             movienames.append(i['name'])
             movieimages.append(i['poster'])
         return render_template("home.html",loggedin=loggedin,movieimages=movieimages,movienames=movienames)
-
+    else:
+        button = request.form['button']
+        if button == "login":
+            return redirect(url_for("login"))
+        elif button == "create_account":
+            return redirect(url_for("create_account"))
+        elif button == "edit_account":
+            return redirect(url_for("edit_account"))
+        else:
+            return redirect(url_for("find_tickets"))
+    
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
