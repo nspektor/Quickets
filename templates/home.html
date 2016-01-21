@@ -19,7 +19,18 @@
       <br>
       <a href="/find_tickets" class="btn btn-info" role="button">Watch Now!</a>
       <a href="/home" class="btn btn-info" role="button">Nope</a>
-      
+      {% if loggedin %}
+    	<h2> Hi there, {{ uname }} </h2>
+	<form method = "POST">
+      	 <button  name = "button" type="submit" class="btn" value="edit_account"> Edit Account</button>
+         <button  name = "button" type="submit" class="btn" value="find_tickets"> Find Tickets</button>
+    	</form>
+      {% else %}
+    	<form method = "POST">
+      	 <button  name = "button" type="submit" class="btn" value="login"> Log In </button>
+      	 <button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
+    	</form>
+      {% endif %}
     </center>
   </div>
 </div>
