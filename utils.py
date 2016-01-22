@@ -16,17 +16,21 @@ ordering tickets
 
 def buyTickets():
     global headers
-    r=requests.get("https://api.amctheatres.com/v2/theatres/610/showtimes/01-20-2016",headers=headers)
+    rn=datetime.datetime.now()
+    date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
+    link="https://api.amctheatres.com/v2/theatres/610/showtimes/%s"%(date)
+    r=requests.get(link, headers=headers)
     q=r.json()
     #print q
     showtimeData=q['_embedded']['showtimes']
+    #print showtimeData
     showtime=showtimeData[0]
     sku=showtime['ticketPrices'][0]['sku']
-    p=requests.post('https://api.amctheatres.com/v2/orders', headers=headers)
+    p=requests.post('https://api.amctheatres.com/v2/orders', headers=headers,data={'email':'developers@amctheatres.com'})
     print p.reason
     #print sku
     
-#buyTickets()
+buyTickets()
 
 '''
 returns list of movies currently playing in theatres, as a list of dictionaries
@@ -162,10 +166,12 @@ def getMovieAvailability(theatreNo, movieTitle):
             p.append(asdf['showDateTimeLocal'])
     print p
     return p
+
+    
     
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
 #getTheatresPlayingMovie(movieno)
-getTheatreShowtimes(610, 'The Danish girl')
+#getTheatreShowtimes(610, 'The Danish girl')
 
 #getNearbyZips(10282, 5)
 #getZipTheatres('new-york', 10011)
