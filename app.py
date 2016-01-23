@@ -44,8 +44,9 @@ def iterate():
 def find_tix():
     print 'start'
     movieInfo=request.form
+    print movieInfo['name']
+    
     #jsdata=request.form['movieInfo']
-    return 
     #print jsdata
     #print json.loads(jsdata)
     return 'ayy'
