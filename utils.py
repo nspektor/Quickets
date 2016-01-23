@@ -141,7 +141,7 @@ def getTheatreShowtimes(theatreNo, ID):
     rn=datetime.datetime.now()
     date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
     
-    link0='https://api.amctheatres.com/v2/movies/%d' % (ID)
+    link0='https://api.amctheatres.com/v2/movies/%d' % (int(ID))
     r0=requests.get(link0, headers=headers)
     q0=r0.json()
     movieTitle=q0['name']
@@ -163,19 +163,25 @@ def getTheatreShowtimes(theatreNo, ID):
         theatreName=q2['name']
         #print theatreName
         for show in showtimeData:
-        #print i['showDateTimeLocal']
-            showtimeList.append({'theatreName': theatreName, 'time': show['showDateTimeLocal'], 'avail': show['isSoldOut']})
+            rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
+            #print rawtime[:-3]
+            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut']})
     #print showtimeList
         return showtimeList
     except KeyError:
         print q['errors'][0]['message']
 
 def idToWWM(ID):
-    link0='https://api.amctheatres.com/v2/movies/%d' % (ID)
+    link0='https://api.amctheatres.com/v2/movies/%d' % (int(ID))
     r0=requests.get(link0, headers=headers)
     q0=r0.json()
     return q0['wwmReleaseNumber']
 
+'''
+essentially combines all the other functions: takes a state, postal code, and movie ID to find the showtimes for that movie in nearby theatres
+returns list of dictionaries, in the format:
+   {'theatreName': name of theatre, 'time': the showtime, 'avail': True/False about ticket availability}
+'''
 def getShowInfo(state, postalCode, ID):
     movieWWM=idToWWM(ID)
     nearbyTheatres=getZipTheatres(state, postalCode)
@@ -196,7 +202,7 @@ def getShowInfo(state, postalCode, ID):
     for theatre in finalTheatres:
         #print getTheatreShowtimes(theatre, ID)
         showtimes.append(getTheatreShowtimes(theatre, ID))
-    print showtimes
+    return showtimes
     
     
 #movieno=getNowPlaying()[0][getNowPlaying()[0].keys()[0]]
@@ -213,4 +219,4 @@ theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print 'theatreNo: '+str(theatresPM[0])
 #print 'title: '+testMovie['name']
 #getTheatreShowtimes(theatresPM[0], testMovie['id'])
-getShowInfo('texas', 73301, testMovie['id'])
+#getShowInfo('texas', 73301, testMovie['id'])

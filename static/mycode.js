@@ -29,9 +29,24 @@ var switchMovie = function switchMovie() {
 
 var chooseMovie = function chooseMovie() {
     console.log('chooseMovie');
-    var data={currentMovie};
-    $.post('/find_tix', currentMovie);
-    console.log('fin choose');
+    $.ajax({
+	url: '/find_tix',
+	data: currentMovie,
+	type: 'POST',
+	success: function(e) {
+	    var showtimeData=JSON.parse(e);
+	    console.log(showtimeData);
+	    console.log(showtimeData[0][0]);
+	    var showtimes=[];
+	    for ( i=0; i<showtimeData[0].length; i++) {
+		showtimes.push(showtimeData[0][i]);
+	    }
+	    console.log(showtimes[0]['avail']);
+	},
+	error: function(error) {
+	    console.log(error);
+	}
+    });
 };
     
 document.getElementById("switch").addEventListener("click", switchMovie);

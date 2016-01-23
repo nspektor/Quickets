@@ -44,12 +44,13 @@ def iterate():
 def find_tix():
     print 'start'
     movieInfo=request.form
-    print movieInfo['name']
-    
+    movieID=movieInfo['id']
+    #texas for now, to be replaced with stuff from database
+    showtimes=utils.getShowInfo('texas', 73301, movieID)
     #jsdata=request.form['movieInfo']
     #print jsdata
     #print json.loads(jsdata)
-    return 'ayy'
+    return json.dumps(showtimes)
 
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
