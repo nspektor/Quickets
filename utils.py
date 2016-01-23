@@ -35,7 +35,7 @@ buyTickets()
 '''
 returns list of movies currently playing in theatres, as a list of dictionaries
 format:
-   {'name': movie name, 'wwmRN': movie's wwmReleaseNumber, 'id': movie's id}
+   {'name': movie name, 'wwmRN': movie's wwmReleaseNumber, 'id': movie's id, 'poster': poster URL, 'genre': movie's genre, 'blurb': movie's synopsis}
 
 '''
 def getNowPlaying():
@@ -44,13 +44,15 @@ def getNowPlaying():
     q=r.json()
     movieData=q['_embedded']['movies']
     #print movieData[0].keys()
-    #print movieData[0]['media']
+    #print movieData[0]['synopsis']
     movieList=[]
     for movie in movieData:
-        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge']})
-    print movieList[0]['name']
-    print movieList[0]['poster']
+        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge'], 'genre': movie['genre'].lower(), 'blurb': movie['synopsis']})
+    #print movieList[0]['name']
+    #print movieList[0]['genre']
+    #print movieList[0]['poster']
     return movieList
+
 #getNowPlaying()
 
 '''
@@ -136,12 +138,13 @@ def getTheatreShowtimes(theatreNo, movieTitle):
     r=requests.get(link, headers=headers)
     q=r.json()
     showtimeData=q['_embedded']['showtimes']
-    print showtimeData[0].keys()
     #print showtimeData[0].keys()
+    print showtimeData[0].keys()
     p = []
     for i in showtimeData:
-        print i['showDateTimeLocal']
+        #print i['showDateTimeLocal']
         p.append(i['showDateTimeLocal'])
+    #print p
     return p
 
         
@@ -164,7 +167,7 @@ def getMovieAvailability(theatreNo, movieTitle):
     for asdf in l:
         if(not asdf['isSoldOut']):
             p.append(asdf['showDateTimeLocal'])
-    print p
+    #print p
     return p
 
     
@@ -179,4 +182,6 @@ def getMovieAvailability(theatreNo, movieTitle):
 #print testMovie
 #theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print theatresPM
+#print 'theatreNo: '+str(theatresPM[0])
+#print 'title: '+testMovie['name']
 #getMovieAvailability(theatresPM[0], testMovie['name'])

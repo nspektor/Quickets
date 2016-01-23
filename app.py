@@ -14,13 +14,15 @@ def home():
         if 'username' in session:
             loggedin = True
             username = session['username']
-        movies = utils.getNowPlaying()
+        '''movies = utils.getNowPlaying()
         movieimages = []
         movienames = []
+        movieblurbs = []
         for i in movies:
             movienames.append(i['name'])
             movieimages.append(i['poster'])
-        return render_template("home.html",loggedin=loggedin,movieimages=movieimages,movienames=movienames)
+            movieblurbs.append(i['blurb'])'''
+        return render_template("home.html",loggedin=loggedin)
     else:
         button = request.form['button']
         if button == "login":
@@ -29,9 +31,26 @@ def home():
             return redirect(url_for("create_account"))
         elif button == "edit_account":
             return redirect(url_for("edit_account"))
-        else:
-            return redirect(url_for("find_tickets"))
+        #else:
+        #    return redirect(url_for("find_tickets"))
+
+@app.route('/iterate')
+def iterate():
+    print 'move to next movie'
+    movieInfo=utils.getNowPlaying()
+    return json.dumps(movieInfo)
+
+@app.route('/find_tix', methods=['POST'])
+def find_tix():
+    print 'start'
+    movieInfo=request.form
+    print movieInfo['name']
     
+    #jsdata=request.form['movieInfo']
+    #print jsdata
+    #print json.loads(jsdata)
+    return 'ayy'
+
 @app.route("/login", methods=["GET","POST"])
 @app.route("/login/", methods=["GET","POST"])
 def login():
@@ -90,7 +109,9 @@ def edit_account():
 @app.route("/find_tickets", methods=["GET","POST"])
 @app.route("/find_tickets/", methods=["GET","POST"])
 def find_tickets():
-    return render_template("find_tickets.html")
+    #dummy values for display purposes, needs to get the movie from homepage
+    showtimes=utils.getMovieAvailability(2585, 'Ride Along 2')
+    return render_template("find_tickets.html", showtimes=showtimes)
 
 
 if __name__=="__main__":

@@ -1,0 +1,16 @@
+console.log('ayy js');
+
+var movieNo=0;
+var switchMovie = function switchMovie() {
+    console.log('switchMovie');
+    $.get('/iterate', function(e) {
+	console.log('iteratin');
+	var movieInfo=JSON.parse(e);
+
+	var name=movieInfo[movieNo]['name'];
+	var poster=movieInfo[movieNo]['poster'];
+	var blurb=movieInfo[movieNo]['blurb'];
+
+	$('#movieName').text(name);
+    });
+};
