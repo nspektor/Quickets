@@ -49,6 +49,9 @@ var chooseMovie = function chooseMovie() {
 		for (j=0; j<showtimeData[i].length; j++) {
 		    console.log('in loop2');
 		    $('#shows').append(showtimeData[i][j]['time']+'     '+showtimeData[i][j]['avail']);
+		    if (showtimeData[i][j]['avail'].localeCompare('false')==0) {
+			$('#shows').append('    '+showtimeData[i][j]['buy']);
+		    }
 		    $('#shows').append('<br>');
 		    //$('#shows').append(showtimeData[i][j]['avail']);
 		}

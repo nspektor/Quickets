@@ -150,11 +150,10 @@ def getTheatreShowtimes(theatreNo, ID):
     link='https://api.amctheatres.com/v2/theatres/%d/showtimes/%s/?movie=%s' % (theatreNo, date, name)
     r=requests.get(link, headers=headers)
     q=r.json()
-    #print q
     try:
         showtimeData=q['_embedded']['showtimes']
-    #print showtimeData[0].keys()
-    #print showtimeData[0].keys()
+        #print showtimeData[0]['purchaseUrl']
+    #printshowtimeData[0].keys()
         showtimeList = []
         link2='https://api.amctheatres.com/v2/theatres/%d' % (theatreNo)
         r2=requests.get(link2, headers=headers)
@@ -165,7 +164,7 @@ def getTheatreShowtimes(theatreNo, ID):
         for show in showtimeData:
             rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
             #print rawtime[:-3]
-            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut'], 'address': address})
+            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut'], 'address': address, 'buy': show['purchaseUrl']})
     #print showtimeList
         return showtimeList
     except KeyError:
@@ -180,7 +179,7 @@ def idToWWM(ID):
 '''
 essentially combines all the other functions: takes a state, postal code, and movie ID to find the showtimes for that movie in nearby theatres
 returns list of dictionaries, in the format:
-   {'theatreName': name of theatre, 'time': the showtime, 'avail': True/False about ticket availability, 'address': the theatre's address}
+   {'theatreName': name of theatre, 'time': the showtime, 'avail': True/False about ticket availability, 'address': the theatre's address, 'buy': purchase url}
 '''
 def getShowInfo(state, postalCode, ID):
     movieWWM=idToWWM(ID)
@@ -219,5 +218,5 @@ theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print theatresPM
 #print 'theatreNo: '+str(theatresPM[0])
 #print 'title: '+testMovie['name']
-#getTheatreShowtimes(theatresPM[0], testMovie['id'])
-getShowInfo('texas', 73301, testMovie['id'])
+getTheatreShowtimes(theatresPM[0], testMovie['id'])
+#getShowInfo('texas', 73301, testMovie['id'])
