@@ -47,7 +47,7 @@ def authenticate(uName, passwordHash):
 def getFavorites(username):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
-    
+
     stories = []
     q = """SELECT favorites.id
     FROM favorites

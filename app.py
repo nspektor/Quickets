@@ -97,7 +97,7 @@ def create_account():
         passhash = m.hexdigest()
         if (newUser(username, passhash)):
             smsg = "You will be redirected to the log-in page in a moment."
-            return render_template("login.html", success = smsg, s = session);
+            return render_template("create_account.html", success = smsg, s = session);
 
         error = "Username already in use!"
         return render_template("create_account.html", err = error, s = session)
