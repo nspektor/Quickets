@@ -48,7 +48,15 @@ var chooseMovie = function chooseMovie() {
 		$('#shows').append('<br>');
 		for (j=0; j<showtimeData[i].length; j++) {
 		    console.log('in loop2');
-		    $('#shows').append(showtimeData[i][j]['time']+'     '+showtimeData[i][j]['avail']);
+		    $('#shows').append(showtimeData[i][j]['time']);
+		    console.log(showtimeData[i][j]['avail']);
+		   
+		    var n=showtimeData[i][j]['avail'].localeCompare('false');
+		    console.log(n);
+		    if (showtimeData[i][j]['avail'].localeCompare('False')==0) {
+			console.log('same');
+			$('#shows').append('    '+showtimeData[i][j]['buy']);
+		    }
 		    $('#shows').append('<br>');
 		    //$('#shows').append(showtimeData[i][j]['avail']);
 		}
@@ -70,6 +78,7 @@ var chooseMovie = function chooseMovie() {
 	}
     });
 };
-    
+
+switchMovie();
 document.getElementById("switch").addEventListener("click", switchMovie);
 document.getElementById("watch").addEventListener("click", chooseMovie);
