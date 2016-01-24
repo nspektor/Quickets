@@ -6,6 +6,12 @@
     <center>
       <h1>Welcome to Quickets</h1>
       <h2>Last minute tickets!</h2>
+      {% if loggedin %}
+      <p> hiya, {{ uname }}, youre logged in </p>
+
+      {% else %}
+      <p> oh </p>
+      {% endif %}
       <div id="movieName"><h3></h3></div>
       <div class="row">
 	<div class="col-xs-6">
