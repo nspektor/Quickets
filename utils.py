@@ -164,7 +164,7 @@ def getTheatreShowtimes(theatreNo, ID):
         for show in showtimeData:
             rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
             #print rawtime[:-3]
-            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut'], 'address': address, 'buy': show['purchaseUrl']})
+            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': str(show['isSoldOut']), 'address': address, 'buy': show['purchaseUrl']})
     #print showtimeList
         return showtimeList
     except KeyError:
