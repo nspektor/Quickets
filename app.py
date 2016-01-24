@@ -73,6 +73,10 @@ def login():
             error = "Invalid username and password combination"
             return render_template("login.html", err = error, s = session)
 
+@app.route("/logout", methods=["GET","POST"])
+@app.route("/logout/", methods=["GET","POST"])
+def logout():
+    return render_template("logout.html")
 
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
