@@ -82,12 +82,11 @@ def create_account():
     else:
         username = request.form['username']
         password = request.form['password']
-
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
             return render_template("create_account.html", err = error, s = session)
         if (password == ""):
-            error = "You cannot have no password!"
+            error = "You need a password!"
             return render_template("create_account.html", err = error, s = session)
         if " " in password or "\t" in password:
             error = "You cannot have spaces in your password!"
@@ -97,8 +96,7 @@ def create_account():
         passhash = m.hexdigest()
         if (newUser(username, passhash)):
             smsg = "You will be redirected to the log-in page in a moment."
-            return render_template("login.html", success = smsg, s = session);
-
+            return redirect(url_for("login"), success = smsg, s = session);
         error = "Username already in use!"
         return render_template("create_account.html", err = error, s = session)
 

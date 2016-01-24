@@ -14,7 +14,7 @@ def newUser(username, passwordHash):
     FROM users
     WHERE users.username = ?
     """
-    usernames = c.execute(q, (username,)).fetchall()
+    usernames = c.execute(q, (username)).fetchall()
     if len(usernames) == 0:
         q="INSERT INTO users VALUES (?,?)"
         c.execute(q, (username, passwordHash))
