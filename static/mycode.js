@@ -8,6 +8,7 @@ var switchMovie = function switchMovie() {
     $.get('/iterate', function(e) {
 	console.log('iteratin');
 	console.log(movieNo);
+	$('#shows').text('');
 	movieInfo=JSON.parse(e);
 	//currentMovie=movieInfo;
 	console.log('did cM thing');
