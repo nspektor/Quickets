@@ -76,7 +76,8 @@ def login():
 @app.route("/logout", methods=["GET","POST"])
 @app.route("/logout/", methods=["GET","POST"])
 def logout():
-    return render_template("logout.html")
+    del session["username"]
+    return redirect(url_for('home'))
 
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
