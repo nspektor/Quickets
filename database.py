@@ -10,11 +10,12 @@ def newUser(username, passwordHash):
     c = conn.cursor()
 
     q="""
-    SELECT users.username
+    SELECT *
     FROM users
     WHERE users.username = ?
     """
-    usernames = c.execute(q, (username)).fetchall()
+    usernames = []
+    usernames = c.execute(q, (username,)).fetchall()
     if len(usernames) == 0:
         q="INSERT INTO users VALUES (?,?)"
         c.execute(q, (username, passwordHash))

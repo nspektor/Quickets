@@ -80,24 +80,32 @@ def create_account():
     if request.method == "GET":
         return render_template("create_account.html")
     else:
+        print "1"
         username = request.form['username']
+        print "4"
         password = request.form['password']
+        print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
+            print "a"
             return render_template("create_account.html", err = error, s = session)
         if (password == ""):
             error = "You need a password!"
+            print "b"
             return render_template("create_account.html", err = error, s = session)
         if " " in password or "\t" in password:
             error = "You cannot have spaces in your password!"
+            print "c"
             return render_template("create_account.html", err = error, s = session)
         m = hashlib.md5()
         m.update(password)
         passhash = m.hexdigest()
         if (newUser(username, passhash)):
             smsg = "You will be redirected to the log-in page in a moment."
-            return redirect(url_for("login"), success = smsg, s = session);
+            print "d"
+            return redirect(url_for("login"));
         error = "Username already in use!"
+        print "e"
         return render_template("create_account.html", err = error, s = session)
 
 @app.route("/edit_account", methods=["GET","POST"])
