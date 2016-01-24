@@ -70,6 +70,7 @@ var chooseMovie = function chooseMovie() {
 	}
     });
 };
-    
+
+switchMovie();
 document.getElementById("switch").addEventListener("click", switchMovie);
 document.getElementById("watch").addEventListener("click", chooseMovie);
