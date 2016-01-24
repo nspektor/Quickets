@@ -22,7 +22,7 @@ def home():
             movienames.append(i['name'])
             movieimages.append(i['poster'])
             movieblurbs.append(i['blurb'])'''
-        return render_template("home.html",loggedin=loggedin)
+        return render_template("home.html",loggedin=loggedin,username=username)
     else:
         button = request.form['button']
         if button == "login":
