@@ -36,13 +36,34 @@ var chooseMovie = function chooseMovie() {
 	success: function(e) {
 	    var showtimeData=JSON.parse(e);
 	    console.log(showtimeData);
-	    console.log(showtimeData[0][0]);
+	    console.log(showtimeData.length);
+	    //console.log(showtimeData[0][0]['avail']);
 	    var showtimes=[];
-	    for ( i=0; i<showtimeData[0].length; i++) {
-		showtimes.push(showtimeData[0][i]);
+	    for ( i=0; i<showtimeData.length; i++) {
+		console.log('in loop1');
+		$('#shows').append(showtimeData[i][0]['theatreName']);
+		$('#shows').append('<br>');
+		$('#shows').append(showtimeData[i][0]['address']);
+		$('#shows').append('<br>');
+		for (j=0; j<showtimeData[i].length; j++) {
+		    console.log('in loop2');
+		    $('#shows').append(showtimeData[i][j]['time']+'     '+showtimeData[i][j]['avail']);
+		    $('#shows').append('<br>');
+		    //$('#shows').append(showtimeData[i][j]['avail']);
+		}
+		$('#shows').append('<br>');
+		//showtimes.push(showtimeData[i]);
+		//console.log(showtimes[i]);
+		//$('#shows').append(showtimes[i]['avail']);
+		//$('#shows').append(showtimes[i]['theatreName']);
+		//$('#shows').append(showtimes[i]['time']);
+		//$('#shows').text(showtimes[i]['avail']);
 	    }
-	    console.log(showtimes[0]['avail']);
-	},
+	    //console.log(showtimes[0]['avail']);
+	    //console.log(document.getElementById('shows'));
+	    //document.getElementById('shows').innerHTML='ayy';
+	    
+	    },
 	error: function(error) {
 	    console.log(error);
 	}

@@ -65,7 +65,7 @@ def getTheatresPlayingMovie(wwm):
     global headers
     link="https://api.amctheatres.com/v2/theatres/views/now-playing/wwm-release-number/%d?page-size=100" % (wwm)
     r=requests.get(link, headers=headers)
-    print r
+    #print r
     q=r.json()
     theatreData=q['_embedded']['theatres']
     theatreList=[]
@@ -95,13 +95,13 @@ def getZipTheatres(state, postalCode):
             print "This theatre is a butt"'''
     for theatre in theatreData:
         stateTheatres.append(theatre)
-    print len(stateTheatres)
-    nearbyZips=getNearbyZips(postalCode, 100)
+    #print len(stateTheatres)
+    nearbyZips=getNearbyZips(postalCode, 200)
     #print nearbyZips
     for theatre in stateTheatres:
         tZip=theatre['location']['postalCode'].split('-')[0]
         #tZip=theatre['location']['postalCode']
-        print tZip
+        #print tZip
         #print theatre['location']['postalCode']
         if tZip in nearbyZips:
             #print theatre['name']
@@ -110,7 +110,7 @@ def getZipTheatres(state, postalCode):
             #if 'westWorldMediaNumber' in theatre.keys():
             #    print 'nearbyZips contains '+theatre['location']['postalCode']
             zipTheatres.append(theatre['id'])
-    print zipTheatres
+    #print zipTheatres
     return zipTheatres
 
 
@@ -140,7 +140,7 @@ def getNearbyZips(postalCode, radius):
 def getTheatreShowtimes(theatreNo, ID):
     rn=datetime.datetime.now()
     date=str(rn.month)+'-'+str(rn.day)+'-'+str(rn.year)
-    
+    global headers
     link0='https://api.amctheatres.com/v2/movies/%d' % (int(ID))
     r0=requests.get(link0, headers=headers)
     q0=r0.json()
@@ -148,10 +148,9 @@ def getTheatreShowtimes(theatreNo, ID):
     titleList=movieTitle.split(' ')
     name=titleList[-1]
     link='https://api.amctheatres.com/v2/theatres/%d/showtimes/%s/?movie=%s' % (theatreNo, date, name)
-    global headers
     r=requests.get(link, headers=headers)
     q=r.json()
-    print q
+    #print q
     try:
         showtimeData=q['_embedded']['showtimes']
     #print showtimeData[0].keys()
@@ -160,12 +159,13 @@ def getTheatreShowtimes(theatreNo, ID):
         link2='https://api.amctheatres.com/v2/theatres/%d' % (theatreNo)
         r2=requests.get(link2, headers=headers)
         q2=r2.json()
+        address=q2['location']['addressLine1']
         theatreName=q2['name']
         #print theatreName
         for show in showtimeData:
             rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
             #print rawtime[:-3]
-            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut']})
+            showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': show['isSoldOut'], 'address': address})
     #print showtimeList
         return showtimeList
     except KeyError:
@@ -180,28 +180,29 @@ def idToWWM(ID):
 '''
 essentially combines all the other functions: takes a state, postal code, and movie ID to find the showtimes for that movie in nearby theatres
 returns list of dictionaries, in the format:
-   {'theatreName': name of theatre, 'time': the showtime, 'avail': True/False about ticket availability}
+   {'theatreName': name of theatre, 'time': the showtime, 'avail': True/False about ticket availability, 'address': the theatre's address}
 '''
 def getShowInfo(state, postalCode, ID):
     movieWWM=idToWWM(ID)
     nearbyTheatres=getZipTheatres(state, postalCode)
-    print 'nearbyTheatres: '
-    print nearbyTheatres
+    #print 'nearbyTheatres: '
+    #print nearbyTheatres
     theatresPlayingMovie=getTheatresPlayingMovie(movieWWM)
-    print 'theatresPlayingMovie: '
-    print theatresPlayingMovie
+    #print 'theatresPlayingMovie: '
+    #print theatresPlayingMovie
     finalTheatres=[]
     for theatre in nearbyTheatres:
-        print theatre
+        #print theatre
         if theatre in theatresPlayingMovie:
-            print 'its in!'
+            #print 'its in!'
             finalTheatres.append(theatre)
-    print 'finals'
-    print finalTheatres
+    #print 'finals'
+    #print finalTheatres
     showtimes=[]
     for theatre in finalTheatres:
         #print getTheatreShowtimes(theatre, ID)
         showtimes.append(getTheatreShowtimes(theatre, ID))
+    #print showtimes
     return showtimes
     
     
@@ -219,4 +220,4 @@ theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print 'theatreNo: '+str(theatresPM[0])
 #print 'title: '+testMovie['name']
 #getTheatreShowtimes(theatresPM[0], testMovie['id'])
-#getShowInfo('texas', 73301, testMovie['id'])
+getShowInfo('texas', 73301, testMovie['id'])
