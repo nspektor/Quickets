@@ -1,6 +1,7 @@
 console.log('ayy js');
 
 var movieNo=0;
+var movieNo2=0;
 var currentMovie;
 
 var switchMovie = function switchMovie() {
@@ -23,8 +24,39 @@ var switchMovie = function switchMovie() {
 	$('#blurb').text(blurb);
 	$('#poster').attr('src', poster);
 	movieNo++;
+	if(movieNo == movieInfo.length){
+	    movieNo = 0;
+	}
 	console.log(movieNo);
 	currentMovie=movieInfo[movieNo];
+    });
+};
+
+var switchMovie2 = function switchMovie2() {
+    console.log('switchMovie2');
+    $.get('/recommend', function(e) {
+	console.log('recommendin');
+	console.log(movieNo2);
+	$('#shows').text('');
+	movieInfo=JSON.parse(e);
+	//currentMovie=movieInfo;
+	console.log('did cM thing');
+	console.log(movieInfo);
+	console.log('just printed');
+	var name=movieInfo[movieNo2]['name'];
+	console.log(name);
+	var poster=movieInfo[movieNo2]['poster'];
+	var blurb=movieInfo[movieNo2]['blurb'];
+
+	$('#movieName').text(name);
+	$('#blurb').text(blurb);
+	$('#poster').attr('src', poster);
+	movieNo2++;
+	if(movieNo2 == movieInfo.length){
+	    movieNo2 = 0;
+	}
+	console.log(movieNo2);
+	currentMovie=movieInfo[movieNo2];
     });
 };
 
@@ -82,3 +114,5 @@ var chooseMovie = function chooseMovie() {
 switchMovie();
 document.getElementById("switch").addEventListener("click", switchMovie);
 document.getElementById("watch").addEventListener("click", chooseMovie);
+document.getElementById("switch2").addEventListener("click", switchMovie2);
+console.log("stuff")

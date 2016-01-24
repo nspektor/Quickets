@@ -1,5 +1,6 @@
 import requests
 import datetime
+from database import *
 
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
 #stateTheatres=[] #list of nearby theatre wwm numbers
@@ -53,7 +54,20 @@ def getNowPlaying():
     #print movieList[0]['poster']
     return movieList
 
-#getNowPlaying()
+def getNowPlaying2(username):
+    global headers
+    r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
+    q=r.json()
+    movieData=q['_embedded']['movies']
+    #print movieData[0].keys()
+    #print movieData[0]['synopsis']
+    movieList=[]
+    for movie in movieData:
+        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge'], 'genre': movie['genre'].lower(), 'blurb': movie['synopsis']})
+    #print movieList[0]['name']
+    #print movieList[0]['genre']
+    #print movieList[0]['poster']
+    return movieList
 
 '''
 takes movie's wwm number

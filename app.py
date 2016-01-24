@@ -11,6 +11,7 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
         loggedin = False
+        username = ""
         if 'username' in session:
             loggedin = True
             username = session['username']
@@ -22,7 +23,7 @@ def home():
             movienames.append(i['name'])
             movieimages.append(i['poster'])
             movieblurbs.append(i['blurb'])'''
-        return render_template("home.html",loggedin=loggedin)
+        return render_template("home.html",loggedin=loggedin,uname=username)
     else:
         button = request.form['button']
         if button == "login":
@@ -38,6 +39,12 @@ def home():
 def iterate():
     print 'move to next movie'
     movieInfo=utils.getNowPlaying()
+    return json.dumps(movieInfo)
+
+@app.route('/recommend')
+def recommend():
+    print 'recommending'
+    customMovieInfo=utils.getNowPlaying2(session["username"])
     return json.dumps(movieInfo)
 
 @app.route('/find_tix', methods=['POST'])
