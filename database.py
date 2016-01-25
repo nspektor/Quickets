@@ -5,7 +5,7 @@ from time import time
 # input: username, hash (hexstring) of user's password
 # returns: true if the username is NOT in the database, and a user is created
 # returns; false if the username has been taken
-def newUser(username, passwordHash):
+def newUser(username, passwordHash,prefs):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
 
@@ -17,8 +17,8 @@ def newUser(username, passwordHash):
     usernames = []
     usernames = c.execute(q, (username,)).fetchall()
     if len(usernames) == 0:
-        q="INSERT INTO users VALUES (?,?)"
-        c.execute(q, (username, passwordHash))
+        q="INSERT INTO users VALUES (?,?,?)"
+        c.execute(q, (username, passwordHash,prefs))
         conn.commit()
         return True
     else:
@@ -50,8 +50,8 @@ def getFavorites(username):
     c = conn.cursor()
     
     stories = []
-    q = """SELECT favorites.id
-    FROM favorites
+    q = """SELECT users.preference
+    FROM users
     WHERE favorites.username = '%s'""" % (username)
     result = c.execute(q).fetchall()
     return result

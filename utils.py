@@ -61,9 +61,50 @@ def getNowPlaying2(username):
     movieData=q['_embedded']['movies']
     #print movieData[0].keys()
     #print movieData[0]['synopsis']
+    temp = getFavorites(username);
+    temp2 = []
+    int i = 1;
+    while i < 16:
+        if temp[i] == "on":
+            if i == 0:
+                temp2.append("adventure")
+            elif i == 1:
+                temp2.append("animation")
+            elif i == 2:
+                temp2.append("comedy")
+            elif i == 3:
+                temp2.append("western")
+            elif i == 4:
+                temp2.append("special event")
+            elif i == 5:
+                temp2.append("fantasy")
+            elif i == 6:
+                temp2.append("musical")
+            elif i == 7:
+                temp2.append("science fiction")
+            elif i == 8:
+                temp2.append("film festival")
+            elif i == 9:
+                temp2.append("suspense")
+            elif i == 10:
+                temp2.append("family")
+            elif i == 11:
+                temp2.append("romantic comedy")
+            elif i == 12:
+                temp2.append("action")
+            elif i == 13:
+                temp2.append("documentary")
+            elif i == 14:
+                temp2.append("horror")
+            elif i == 15:
+                temp2.append("drama")
     movieList=[]
     for movie in movieData:
-        movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge'], 'genre': movie['genre'].lower(), 'blurb': movie['synopsis']})
+        if movie['genre'].lower() in temp2:
+            movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge'], 'genre': movie['genre'].lower(), 'blurb': movie['synopsis']})
+    for movie in movieData:
+        if movie['genre'].lower() not in temp2:
+            movieList.append({'name':movie['name'], 'wwmRN':movie['wwmReleaseNumber'], 'id': movie['id'], 'poster': movie['media']['posterLarge'], 'genre': movie['genre'].lower(), 'blurb': movie['synopsis']})
     #print movieList[0]['name']
     #print movieList[0]['genre']
     #print movieList[0]['poster']

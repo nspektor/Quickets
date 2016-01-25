@@ -91,6 +91,10 @@ def create_account():
         username = request.form['username']
         print "4"
         password = request.form['password']
+        int i = 1
+        preference = []
+        while i < 17:
+            preference.append(request.form[str(i)])
         print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
@@ -107,7 +111,7 @@ def create_account():
         m = hashlib.md5()
         m.update(password)
         passhash = m.hexdigest()
-        if (newUser(username, passhash)):
+        if (newUser(username, passhash,preference)):
             smsg = "You will be redirected to the log-in page in a moment."
             print "d"
             return redirect(url_for("login"));
