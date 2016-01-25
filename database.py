@@ -81,7 +81,9 @@ def getInfo(uname, data):
     c = conn.cursor()
     q = """SELECT users.%s
     FROM users
-    WHERE users.username = '%s'""" % (data,username)
+    WHERE users.username = '%s'""" % (data,uname)
+    result = c.execute(q).fetchall()
+    return result
 
 #def getEditedFavorites(username):
 #    conn = sqlite3.connect("infos.db")
