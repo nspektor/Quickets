@@ -82,6 +82,7 @@ def changePass(uname,passw):
     q="""UPDATE users SET password=? WHERE users.username='?'"""
     c.execute(q,(passw,uname,))
     print passw + "1"
+    conn.commit()
 
 def changeZip(uname,zipc):
     conn = sqlite3.connect("infos.db")
@@ -89,6 +90,7 @@ def changeZip(uname,zipc):
     q="""UPDATE users SET zipcode=? WHERE users.username=?"""
     c.execute(q,(zipc,uname,))
     print zipc + "2"
+    conn.commit()
 
 def changeState(uname,state):
     conn = sqlite3.connect("infos.db")
@@ -96,6 +98,7 @@ def changeState(uname,state):
     q="""UPDATE users SET state=? WHERE users.username='%s'"""
     c.execute(q,(state,uname,))
     print state + "3"
+    conn.commit()
 
 def changePref(uname,pref):
     conn = sqlite3.connect("infos.db")
@@ -103,6 +106,7 @@ def changePref(uname,pref):
     q="""UPDATE users SET preference=? WHERE users.username=?"""
     c.execute(q,(pref,uname,))
     print pref + "4"
+    conn.commit()
 
 def getInfo(uname):
     conn = sqlite3.connect("infos.db")
