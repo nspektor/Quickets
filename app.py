@@ -94,7 +94,9 @@ def create_account():
         i = 1
         preference = []
         while i < 17:
+            print "2"
             preference.append(request.form[str(i)])
+            i += 1
         print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"

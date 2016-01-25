@@ -98,6 +98,7 @@ def getNowPlaying2(username):
                 temp2.append("horror")
             elif i == 15:
                 temp2.append("drama")
+            i += 1
     movieList=[]
     for movie in movieData:
         if movie['genre'].lower() in temp2:
