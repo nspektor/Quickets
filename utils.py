@@ -63,7 +63,7 @@ def getNowPlaying2(username):
     #print movieData[0]['synopsis']
     temp = database.getFavorites(username);
     print temp
-    temp = temp[0]
+    temp = temp[0][0].split()
     temp2 = []
     for i in temp:
         if i == '1':
@@ -98,7 +98,6 @@ def getNowPlaying2(username):
             temp2.append("horror")
         elif i == '16':
             temp2.append("drama")
-        i += 1
     movieList=[]
     for movie in movieData:
         if movie['genre'].lower() in temp2:
