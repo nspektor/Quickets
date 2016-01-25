@@ -124,11 +124,16 @@ def getTheatresPlayingMovie(wwm):
     #print r
     q=r.json()
     theatreData=q['_embedded']['theatres']
+    #print theatreData
     theatreList=[]
     for theatre in theatreData:
-        print theatre
-        theatreList.append(theatre['id'])
+        try:
+            print theatre.keys()
+            theatreList.append(theatre['id'])
+        except AttributeError:
+            print 'doesnt exist'
     return theatreList
+    
 
 '''
 takes state and postal code
@@ -241,24 +246,18 @@ returns list of dictionaries, in the format:
 def getShowInfo(state, postalCode, ID):
     movieWWM=idToWWM(ID)
     nearbyTheatres=getZipTheatres(state, postalCode)
-    #print 'nearbyTheatres: '
-    #print nearbyTheatres
+    print 'got nearby theatres, here they are'
+    print nearbyTheatres
     theatresPlayingMovie=getTheatresPlayingMovie(movieWWM)
-    #print 'theatresPlayingMovie: '
-    #print theatresPlayingMovie
+    print 'got theatres playing movie, here they are'
+    print theatresPlayingMovie
     finalTheatres=[]
     for theatre in nearbyTheatres:
-        #print theatre
         if theatre in theatresPlayingMovie:
-            #print 'its in!'
             finalTheatres.append(theatre)
-    #print 'finals'
-    #print finalTheatres
     showtimes=[]
     for theatre in finalTheatres:
-        #print getTheatreShowtimes(theatre, ID)
         showtimes.append(getTheatreShowtimes(theatre, ID))
-    #print showtimes
     return showtimes
     
     
