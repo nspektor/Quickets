@@ -100,6 +100,17 @@ def logout():
     del session["username"]
     return redirect(url_for('home'))
 
+@app.route("/about")
+@app.route("/about/")
+def about():
+    loggedin=False
+    if 'username' in session:
+        loggedin=True
+        username=session['username']
+        return render_template("about.html", loggedin=loggedin, username=username)
+    else:
+        return render_template("about.html", loggedin=False)
+
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
 def create_account():
