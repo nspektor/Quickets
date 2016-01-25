@@ -7,11 +7,8 @@
       <h1>Welcome to Quickets</h1>
       <h2>Last minute tickets!</h2>
       {% if loggedin %}
-      <p> hiya, {{ uname }}, youre logged in </p>
+      <p> hiya, {{ username }}, you're logged in </p>
 
-      {% else %}
-      <p> oh </p>
-      {% endif %}
       <div id="movieName"><h3></h3></div>
       <div class="row">
 	<div class="col-xs-6">
@@ -24,26 +21,25 @@
       <br>
       <br>
       <button class="btn btn-info" role="button" id="watch">Watch Now!</button>
-      {% if loggedin %}
       <button class="btn btn-info" role="button" id="switch2">Nope</button> <br>
-      {% else %}
-      <button class="btn btn-info" role="button" id="switch">Nope</button> <br>
-      {% endif %}
+      <h2> theater </h2>
+      <h3> address </h3>
+      <div class="containter">
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+      </div>
       
-      {% if loggedin %}
-    	<h2> Hi there, {{ uname }} </h2>
-	<form method = "POST">
-      	 <button  name = "button" type="submit" class="btn" value="edit_account"> Edit Account</button>
-         <button  name = "button" type="submit" class="btn" value="find_tickets"> Find Tickets</button>
-    	</form>
+      <div class="container" id="shows"> </div>
+      <script src="../static/mycode.js"></script>
       {% else %}
-    	<form method = "POST">
-      	 <button  name = "button" type="submit" class="btn" value="login"> Log In </button>
-      	 <button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
-    	</form>
-	{% endif %}
-	<div id="shows"> </div>
-	<script src="../static/mycode.js"></script>
+      <form method = "POST">
+      	<button  name = "button" type="submit" class="btn" value="login"> Log In </button>
+      	<button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
+      </form>
+      {% endif %}
     </center>
   </div>
 </div>

@@ -15,6 +15,7 @@ def home():
         if 'username' in session:
             loggedin = True
             username = session['username']
+            return render_template("home.html",loggedin=loggedin,username=username)
         '''movies = utils.getNowPlaying()
         movieimages = []
         movienames = []
@@ -23,7 +24,7 @@ def home():
             movienames.append(i['name'])
             movieimages.append(i['poster'])
             movieblurbs.append(i['blurb'])'''
-        return render_template("home.html",loggedin=loggedin,uname=username)
+        return render_template("home.html",loggedin=False)
     else:
         button = request.form['button']
         if button == "login":
@@ -80,6 +81,11 @@ def login():
             error = "Invalid username and password combination"
             return render_template("login.html", err = error, s = session)
 
+@app.route("/logout", methods=["GET","POST"])
+@app.route("/logout/", methods=["GET","POST"])
+def logout():
+    del session["username"]
+    return redirect(url_for('home'))
 
 @app.route("/create_account", methods=["GET","POST"])
 @app.route("/create_account/", methods=["GET","POST"])
@@ -124,7 +130,23 @@ def create_account():
 @app.route("/edit_account", methods=["GET","POST"])
 @app.route("/edit_account/", methods=["GET","POST"])
 def edit_account():
-    return render_template("edit_account.html")
+    if request.method == "GET":
+        loggedin = False
+        if 'username' in session:
+            loggedin = True
+            username = session['username']
+            return render_template("edit_account.html",loggedin=loggedin,username=username)
+        '''movies = utils.getNowPlaying()
+        movieimages = []
+        movienames = []
+        movieblurbs = []
+        for i in movies:
+           movienames.append(i['name'])
+           movieimages.append(i['poster'])
+           movieblurbs.append(i['blurb'])'''
+        return render_template("edit_account.html",loggedin=False)
+    else:
+        return render_template("edit_account.html",loggedin=False)
 
 @app.route("/find_tickets", methods=["GET","POST"])
 @app.route("/find_tickets/", methods=["GET","POST"])
