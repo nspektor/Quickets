@@ -39,7 +39,7 @@ def home():
 @app.route('/iterate')
 def iterate():
     print 'move to next movie'
-    movieInfo=utils.getNowPlaying()
+    movieInfo=utils.getNowPlaying2(session["username"])
     return json.dumps(movieInfo)
 
 @app.route('/recommend')
@@ -120,11 +120,11 @@ def create_account():
         state = request.form['state']
         print state
         i = 1
-        preference = []
+        preference = ""
         while i < 17:
             ind=str(i)
             if ind in request.form:
-                preference.append(request.form[ind])
+                preference+=request.form[ind] + " "
             i += 1
         print "2"
         if " " in username or "\t" in username:
@@ -142,7 +142,7 @@ def create_account():
         m = hashlib.md5()
         m.update(password)
         passhash = m.hexdigest()
-        if (newUser(username, passhash, zipcode, state)):
+        if (newUser(username, passhash, zipcode, state,preference[:len(preference) - 1])):
             smsg = "You will be redirected to the log-in page in a moment."
             print "d"
             return redirect(url_for("login"));
