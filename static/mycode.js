@@ -74,12 +74,11 @@ var chooseMovie = function chooseMovie() {
 	    var showtimes=[];
 	    for ( i=0; i<showtimeData.length; i++) {
 		console.log('in loop1');
-		$('#shows').append('<h2>');
-		$('#shows').append(showtimeData[i][0]['theatreName']);
-		$('#shows').append('</h2>');
-		$('#shows').append('<h3>');
-		$('#shows').append(showtimeData[i][0]['address']);
-		$('#shows').append('</h3><br> <div class="container">');
+		$('#shows').append('<h2>'+showtimeData[i][0]['theatreName']+'</h2>');
+		//$('#shows').append(showtimeData[i][0]['theatreName']);
+		//$('#shows').append('</h2>');
+		$('#shows').append('<h3>'+showtimeData[i][0]['address']+'</h3>');
+		$('#shows').append('<br> <div class="container">');
 		for (j=0; j<showtimeData[i].length; j++) {
 		    console.log('in loop2');
 		    console.log(showtimeData[i][j]['avail']);
