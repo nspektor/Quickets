@@ -3,9 +3,8 @@
 {% block content %}
 
 <div class="container">
-  <h2>Edit your account</h2>
-  
-<h3> Change Password </h3>
+  <h2>Edit your account, {{ uname }} </h2>
+  <h3> Change Password </h3>
   <form role="form" method="POST">
     <div class="form-group">
       <label for="pwd">Current Password:</label>
@@ -24,6 +23,7 @@
   </form>
 
   <h3> Change Zip Code </h3>
+  <p> current zip code: {{ zip }} </p>
   <form role="form" method="POST">
     <div class="form-group">
       <label for="zipcode">New Zip Code:</label>
@@ -32,7 +32,8 @@
     <button type="submit" name="button" class="btn btn-default">Save Changes</button>
     <a href="/home"  class="btn btn-default" >Cancel</a>
   </form> 
-<h3> Change State</h3>
+  <h3> Change State</h3>
+  <p> current State: {{ state }} </p>
   <form role="form" method="POST">
     <div class="form-group">
       <label for="state">New State:</label>
@@ -43,6 +44,7 @@
   </form>
 
   <h3>Change your favorite genres</h3>
+  <p> current favorites: {{ genre1 }}, {{ genre2 }}, {{genre3 }} </p>
   <form role="form" method="POST">
     <div class="checkbox">
       <label><input type="checkbox" value="adventure">Adventure</label>
