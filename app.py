@@ -159,6 +159,8 @@ def edit_account():
             loggedin = True
             username = session['username']
             return render_template("edit_account.html",loggedin=loggedin,username=username)
+        else:
+            return redirect(url_for("login"))
         '''movies = utils.getNowPlaying()
         movieimages = []
         movienames = []
@@ -169,7 +171,32 @@ def edit_account():
            movieblurbs.append(i['blurb'])'''
         return render_template("edit_account.html",loggedin=False)
     else:
-        return render_template("edit_account.html",loggedin=False)
+        button = request.form['button']
+        if button == "1":
+            m = hashlib.md5()
+            m.update(request.form['paassword'])
+            passhash = m.hexdigest()
+            if authenticate(session["username"], passhash):
+                if request.form['password'] == request.form['password_again']:
+                    changePass(session["username"],request.form['password'])
+                    return redirect(url_for("home"))
+            return render_template("edit_account.html",loggedin=True)
+        elif button == "2":
+            changeZip(session["username"],request.form['Zipcode'])
+            return redirect(url_for("home"))
+        elif button == "3":
+            changeState(session["username"],request.form['State'])
+            return redirect(url_for("home"))
+        else:
+            i = 1
+            preference = ""
+            while i < 17:
+                ind=str(i)
+                if ind in request.form:
+                    preference+=request.form[ind] + " "
+                i += 1
+            changePref(session["username"],preference)
+            return redirect(url_for("home"))
 
 @app.route("/find_tickets", methods=["GET","POST"])
 @app.route("/find_tickets/", methods=["GET","POST"])
