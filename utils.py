@@ -63,7 +63,7 @@ def getNowPlaying2(username):
     #print movieData[0]['synopsis']
     temp = getFavorites(username);
     temp2 = []
-    int i = 1;
+    i = 1;
     while i < 16:
         if temp[i] == "on":
             if i == 0:

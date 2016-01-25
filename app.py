@@ -91,7 +91,7 @@ def create_account():
         username = request.form['username']
         print "4"
         password = request.form['password']
-        int i = 1
+        i = 1
         preference = []
         while i < 17:
             preference.append(request.form[str(i)])
