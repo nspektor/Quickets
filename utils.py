@@ -1,6 +1,6 @@
 import requests
 import datetime
-from database import *
+import database
 
 headers = {'X-AMC-Vendor-Key':'451EB6B4-E2FD-412E-AF07-CA640853CDC3'}
 #stateTheatres=[] #list of nearby theatre wwm numbers
@@ -15,6 +15,42 @@ ticket availability
 ordering tickets
 '''
 
+def itog(i):
+    if i=='1':
+        return 'Adventure'
+    if i=='2':
+        return 'Animation'
+    if i=='3':
+        return 'Comedy'
+    if i=='4':
+        return 'Western'
+    if i=='5':
+        return 'Special event'
+    if i=='6':
+        return 'Fantasy'
+    if i=='7':
+        return 'Musical'
+    if i=='8':
+        return 'Science fiction'
+    if i=='9':
+        return 'Film festival'
+    if i=='10':
+        return 'Suspense'
+    if i=='11':
+        return 'Family'
+    if i=='12':
+        return 'Romantic comedy'
+    if i=='13':
+        return 'Action'
+    if i=='14':
+        return 'Documentary'
+    if i=='15':
+        return 'Horror'
+    if i=='16':
+        return 'Drama'
+    else:
+        print 'wtf'
+        
 def buyTickets():
     global headers
     rn=datetime.datetime.now()
@@ -54,51 +90,50 @@ def getNowPlaying():
     #print movieList[0]['poster']
     return movieList
 
-'''def getNowPlaying2(username):
+def getNowPlaying2(username):
     global headers
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
     q=r.json()
     movieData=q['_embedded']['movies']
     #print movieData[0].keys()
     #print movieData[0]['synopsis']
-    temp = getFavorites(username);
+    temp = database.getFavorites(username);
+    print temp
+    temp = temp[0][0].split()
     temp2 = []
-    i = 1;
-    while i < 16:
-        if temp[i] == "on":
-            if i == 0:
-                temp2.append("adventure")
-            elif i == 1:
-                temp2.append("animation")
-            elif i == 2:
-                temp2.append("comedy")
-            elif i == 3:
-                temp2.append("western")
-            elif i == 4:
-                temp2.append("special event")
-            elif i == 5:
-                temp2.append("fantasy")
-            elif i == 6:
-                temp2.append("musical")
-            elif i == 7:
-                temp2.append("science fiction")
-            elif i == 8:
-                temp2.append("film festival")
-            elif i == 9:
-                temp2.append("suspense")
-            elif i == 10:
-                temp2.append("family")
-            elif i == 11:
-                temp2.append("romantic comedy")
-            elif i == 12:
-                temp2.append("action")
-            elif i == 13:
-                temp2.append("documentary")
-            elif i == 14:
-                temp2.append("horror")
-            elif i == 15:
-                temp2.append("drama")
-            i += 1
+    for i in temp:
+        if i == '1':
+            temp2.append("adventure")
+        elif i == '2':
+            temp2.append("animation")
+        elif i == '3':
+            temp2.append("comedy")
+        elif i == '4':
+            temp2.append("western")
+        elif i == '5':
+            temp2.append("special event")
+        elif i == '6':
+            temp2.append("fantasy")
+        elif i == '7':
+            temp2.append("musical")
+        elif i == '8':
+            temp2.append("science fiction")
+        elif i == '9':
+            temp2.append("film festival")
+        elif i == '10':
+            temp2.append("suspense")
+        elif i == '11':
+            temp2.append("family")
+        elif i == '12':
+            temp2.append("romantic comedy")
+        elif i == '13':
+            temp2.append("action")
+        elif i == '14':
+            temp2.append("documentary")
+        elif i == '15':
+            temp2.append("horror")
+        elif i == '16':
+            temp2.append("drama")
     movieList=[]
     for movie in movieData:
         if movie['genre'].lower() in temp2:
@@ -110,7 +145,9 @@ def getNowPlaying():
     #print movieList[0]['genre']
     #print movieList[0]['poster']
     return movieList
-'''
+
+
+
 '''
 takes movie's wwm number
 returns list of theatre ids of theatres playing that movie

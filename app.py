@@ -39,7 +39,7 @@ def home():
 @app.route('/iterate')
 def iterate():
     print 'move to next movie'
-    movieInfo=utils.getNowPlaying()
+    movieInfo=utils.getNowPlaying2(session["username"])
     return json.dumps(movieInfo)
 
 @app.route('/recommend')
@@ -115,21 +115,29 @@ def about():
 @app.route("/create_account/", methods=["GET","POST"])
 def create_account():
     if request.method == "GET":
+        print 'get'
         return render_template("create_account.html")
     else:
+        print 'not get'
         #print "1"
+        print request.form
         username = request.form['username']
+        print username
     #    print "4"
         password = request.form['password']
+        print password
         zipcode = request.form['zipcode']
+        print zipcode
         state = request.form['state']
-    #    i = 1
-    #    preference = []
-    #    while i < 17:
-    #        print "2"
-    #        preference.append(request.form[str(i)])
-    #        i += 1
-    #    print "2"
+        print state
+        i = 1
+        preference = ""
+        while i < 17:
+            ind=str(i)
+            if ind in request.form:
+                preference+=request.form[ind] + " "
+            i += 1
+        print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
             print "a"
@@ -145,7 +153,7 @@ def create_account():
         m = hashlib.md5()
         m.update(password)
         passhash = m.hexdigest()
-        if (newUser(username, passhash, zipcode, state)):
+        if (newUser(username, passhash, zipcode, state,preference[:len(preference) - 1])):
             smsg = "You will be redirected to the log-in page in a moment."
             print "d"
             return redirect(url_for("login"));
@@ -161,7 +169,19 @@ def edit_account():
         if 'username' in session:
             loggedin = True
             username = session['username']
-            return render_template("edit_account.html",loggedin=loggedin,username=username)
+            favsdat=getFavorites(username)
+            print favsdat[0][0]
+            indlist=favsdat[0][0].split(' ')
+            print indlist
+            favs=[]
+            for ind in indlist:
+                t=str(ind)
+                print t
+                favs.append(utils.itog(t))
+            print favs
+            return render_template("edit_account.html",loggedin=loggedin,username=username, favs=favs)
+        else:
+            return redirect(url_for("login"))
         '''movies = utils.getNowPlaying()
         movieimages = []
         movienames = []
@@ -172,7 +192,35 @@ def edit_account():
            movieblurbs.append(i['blurb'])'''
         return render_template("edit_account.html",loggedin=False)
     else:
-        return render_template("edit_account.html",loggedin=False)
+        button = request.form['button']
+        if button == "1":
+            m = hashlib.md5()
+            m.update(request.form['paassword'])
+            passhash = m.hexdigest()
+            m = hashlib.md5()
+            m.update(request.form['password'])
+            ph = m.hexdigest()
+            if authenticate(session["username"], passhash):
+                if request.form['password'] == request.form['password_again']:
+                    changePass(session["username"],ph)
+                    return redirect(url_for("home"))
+            return render_template("edit_account.html",loggedin=True)
+        elif button == "2":
+            changeZip(session["username"],request.form['Zipcode'])
+            return redirect(url_for("home"))
+        elif button == "3":
+            changeState(session["username"],request.form['State'])
+            return redirect(url_for("home"))
+        else:
+            i = 1
+            preference = ""
+            while i < 17:
+                ind=str(i)
+                if ind in request.form:
+                    preference+=request.form[ind] + " "
+                i += 1
+            changePref(session["username"],preference)
+            return redirect(url_for("home"))
 
 @app.route("/find_tickets", methods=["GET","POST"])
 @app.route("/find_tickets/", methods=["GET","POST"])

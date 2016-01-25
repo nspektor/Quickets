@@ -18,83 +18,87 @@
       <label for="pwdagn">Confirm New Password:</label>
       <input type="password" name="password_again" class="form-control" id="pwdagn" placeholder="Retype password">
     </div>
-    <button type="submit" name="button" class="btn btn-default">Save Changes</button>
+    <button type="submit" name="button" class="btn btn-default" value="1">Save Changes</button>
     <a href="/home"  class="btn btn-default" >Cancel</a>
   </form>
 
   <h3> Change Zip Code </h3>
-  <p> current zip code: {{ zip }} </p>
+  <p> <b>Current Zip Code:</b> {{ zip }} </p>
   <form role="form" method="POST">
     <div class="form-group">
       <label for="zipcode">New Zip Code:</label>
       <input type="text" class="form-control" id="zipcode" placeholder="Enter your zipcode" name="Zipcode">
     </div>
-    <button type="submit" name="button" class="btn btn-default">Save Changes</button>
+    <button type="submit" name="button" class="btn btn-default" value="2">Save Changes</button>
     <a href="/home"  class="btn btn-default" >Cancel</a>
   </form> 
   <h3> Change State</h3>
-  <p> current State: {{ state }} </p>
+  <p> <b>Current State:</b> {{ state }} </p>
   <form role="form" method="POST">
     <div class="form-group">
       <label for="state">New State:</label>
       <input type="text" class="form-control" id="state" placeholder="Enter your State"  name="State">
     </div>
-    <button type="submit" name="button" class="btn btn-default">Save Changes</button>
+    <button type="submit" name="button" class="btn btn-default" value="3">Save Changes</button>
     <a href="/home"  class="btn btn-default" >Cancel</a>
   </form>
 
   <h3>Change your favorite genres</h3>
-  <p> current favorites: {{ genre1 }}, {{ genre2 }}, {{genre3 }} </p>
+  <p> <b>Current Favorites:</b>
+    {% for fav in favs %}
+    {{fav}}
+    {% endfor %}
+  </p>
   <form role="form" method="POST">
     <div class="checkbox">
-      <label><input type="checkbox" value="adventure">Adventure</label>
+      <label><input type="checkbox" value="1" name="1">Adventure</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="animation">Animation</label>
+      <label><input type="checkbox" value="2" name="2">Animation</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="comedy">Comedy</label>
+      <label><input type="checkbox" value="3" name="3">Comedy</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="western">Western</label>
+      <label><input type="checkbox" value="4" name="4">Western</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="specialEvent">Special Events</label>
+      <label><input type="checkbox" value="5" name="5">Special Events</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="fantasy">Fantasy</label>
+      <label><input type="checkbox" value="6" name="6">Fantasy</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="musical">Musical</label>
+      <label><input type="checkbox" value="7" name="7">Musical</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="ScienceFiction">Science Fiction</label>
+      <label><input type="checkbox" value="8" name="8">Science Fiction</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="filmFestival">Film Festival</label>
+      <label><input type="checkbox" value="9" name="9">Film Festival</label>
         </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="suspense">Suspense</label>
+      <label><input type="checkbox" value="10" name="10">Suspense</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="family">Family</label>
+      <label><input type="checkbox" value="11" name="11">Family</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="romCom">Romantic Comedy</label>
+      <label><input type="checkbox" value="12" name="12">Romantic Comedy</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="action">Action</label>
+      <label><input type="checkbox" value="13" name="13">Action</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="documentary">Documentary</label>
+      <label><input type="checkbox" value="14" name="14">Documentary</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="horror">Horror</label>
+      <label><input type="checkbox" value="15" name="15">Horror</label>
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" value="drama">Drama</label>
+      <label><input type="checkbox" value="16" name="16">Drama</label>
     </div>
-    <button type="submit" name="button" class="btn btn-default">Save Changes</button>
+    <button type="submit" name="button" class="btn btn-default" value="4">Save Changes</button>
     <a href="/home"  class="btn btn-default">Cancel</a>
   </form>
 </div>
