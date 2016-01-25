@@ -267,12 +267,12 @@ def getShowInfo(state, postalCode, ID):
 
 #getNearbyZips(10282, 5)
 #getZipTheatres('new-york', 10011)
-testMovie=getNowPlaying()[0]
+#testMovie=getNowPlaying()[0]
 #idToWWM(testMovie['id'])
 #print testMovie
-theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
+#theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print theatresPM
 #print 'theatreNo: '+str(theatresPM[0])
 #print 'title: '+testMovie['name']
-getTheatreShowtimes(theatresPM[0], testMovie['id'])
+#getTheatreShowtimes(theatresPM[0], testMovie['id'])
 #getShowInfo('texas', 73301, testMovie['id'])
