@@ -39,8 +39,8 @@ def home():
 @app.route('/iterate')
 def iterate():
     print 'move to next movie'
-    #movieInfo=utils.getNowPlaying2(session["username"])
-    movieInfo=utils.getNowPlaying()
+    movieInfo=utils.getNowPlaying2(session["username"])
+    #movieInfo=utils.getNowPlaying()
     return json.dumps(movieInfo)
 
 @app.route('/recommend')
