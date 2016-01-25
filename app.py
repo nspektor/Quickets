@@ -54,7 +54,7 @@ def find_tix():
     movieInfo=request.form
     movieID=movieInfo['id']
     #texas for now, to be replaced with stuff from database
-    showtimes=utils.getShowInfo('texas', 73301, movieID)
+    showtimes=utils.getShowInfo(getInfo(session["username"], 'state'),getInfo(session["username"], 'zipcode'), movieID)
     #jsdata=request.form['movieInfo']
     #print jsdata
     #print json.loads(jsdata)
