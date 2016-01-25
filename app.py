@@ -186,9 +186,12 @@ def edit_account():
             m = hashlib.md5()
             m.update(request.form['paassword'])
             passhash = m.hexdigest()
+            m = hashlib.md5()
+            m.update(request.form['password'])
+            ph = m.hexdigest()
             if authenticate(session["username"], passhash):
                 if request.form['password'] == request.form['password_again']:
-                    changePass(session["username"],request.form['password'])
+                    changePass(session["username"],ph)
                     return redirect(url_for("home"))
             return render_template("edit_account.html",loggedin=True)
         elif button == "2":

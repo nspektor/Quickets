@@ -30,7 +30,7 @@ def newUser(username, passwordHash, zipcode, state,preference):
 def authenticate(uName, passwordHash):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
-
+    print passwordHash
     q="""
     SELECT users.username, users.password
     FROM users
@@ -79,7 +79,7 @@ def changeFavorite(storyID, username):
 def changePass(uname,passw):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
-    q="""UPDATE users SET password=? WHERE users.username='?'"""
+    q="""UPDATE users SET password=? WHERE users.username=?"""
     c.execute(q,(passw,uname,))
     print passw + "1"
     conn.commit()
