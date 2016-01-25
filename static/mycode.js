@@ -62,6 +62,7 @@ var switchMovie = function switchMovie() {
 
 var chooseMovie = function chooseMovie() {
     console.log('chooseMovie');
+    $('#shows').empty();
     $.ajax({
 	url: '/find_tix',
 	data: currentMovie,
@@ -87,7 +88,6 @@ var chooseMovie = function chooseMovie() {
 		    console.log(n);
 		    if (showtimeData[i][j]['avail'].localeCompare('False')==0) {
 			console.log('same');
-			$('#shows').append('<a href="');
 			$('#shows').append('<a href="'+showtimeData[i][j]['buy']+ '" class="btn btn-info" role="button">'+ showtimeData[i][j]['time'] + '</a>');
 		    }
 		    //    $('#shows').append('" class="btn btn-info" role="button">');

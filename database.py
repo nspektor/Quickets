@@ -5,7 +5,7 @@ from time import time
 # input: username, hash (hexstring) of user's password
 # returns: true if the username is NOT in the database, and a user is created
 # returns; false if the username has been taken
-def newUser(username, passwordHash, zipcode, state):
+def newUser(username, passwordHash, zipcode, state,preference):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
 
@@ -17,8 +17,8 @@ def newUser(username, passwordHash, zipcode, state):
     usernames = []
     usernames = c.execute(q, (username,)).fetchall()
     if len(usernames) == 0:
-        q="INSERT INTO users VALUES (?,?,?,?)"
-        c.execute(q, (username, passwordHash, zipcode, state))
+        q="INSERT INTO users VALUES (?,?,?,?,?)"
+        c.execute(q, (username, passwordHash, zipcode, state,preference))
         conn.commit()
         return True
     else:
@@ -30,7 +30,7 @@ def newUser(username, passwordHash, zipcode, state):
 def authenticate(uName, passwordHash):
     conn = sqlite3.connect("infos.db")
     c = conn.cursor()
-
+    print passwordHash
     q="""
     SELECT users.username, users.password
     FROM users
@@ -74,6 +74,38 @@ def changeFavorite(storyID, username):
                WHERE favorites.username = ? AND favorites.id = ?
             """
         c.execute(q, (username, storyID))
+    conn.commit()
+
+def changePass(uname,passw):
+    conn = sqlite3.connect("infos.db")
+    c = conn.cursor()
+    q="""UPDATE users SET password=? WHERE users.username=?"""
+    c.execute(q,(passw,uname,))
+    print passw + "1"
+    conn.commit()
+
+def changeZip(uname,zipc):
+    conn = sqlite3.connect("infos.db")
+    c = conn.cursor()
+    q="""UPDATE users SET zipcode=? WHERE users.username=?"""
+    c.execute(q,(zipc,uname,))
+    print zipc + "2"
+    conn.commit()
+
+def changeState(uname,state):
+    conn = sqlite3.connect("infos.db")
+    c = conn.cursor()
+    q="""UPDATE users SET state=? WHERE users.username='%s'"""
+    c.execute(q,(state,uname,))
+    print state + "3"
+    conn.commit()
+
+def changePref(uname,pref):
+    conn = sqlite3.connect("infos.db")
+    c = conn.cursor()
+    q="""UPDATE users SET preference=? WHERE users.username=?"""
+    c.execute(q,(pref,uname,))
+    print pref + "4"
     conn.commit()
 
 def getInfo(uname):

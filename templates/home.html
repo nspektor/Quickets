@@ -14,7 +14,8 @@
 	  <img id="poster" src="" class="img-rounded" alt="poster" width="300" height="448" style="border-radius:20px">
 	</div>
 	<div class="col-xs-6">
-	  <p id="blurb" style="background-color: white; padding: 20px; width:400px; height:448px; border-style: solid; border-radius:20px;"></p>
+	  <p id="blurb">
+<!-- style="background-color: white; padding: 20px; width:400px; height:448px; border-style: solid; border-radius:20px;">--></p>
 	</div>
       </div>
       <br>
@@ -31,9 +32,11 @@
 	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
       </div>-->
       
-      <p class="container" id="shows"> </p>
+      <p id="shows"> </p>
       <script src="../static/mycode.js"></script>
       {% else %}
+      <h1> Welcome to Quickets!</h1>
+      <h3> Make an account or log in to see the movies you might love!</h3>
       <form method = "POST">
       	<button  name = "button" type="submit" class="btn" value="login"> Log In </button>
       	<button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
