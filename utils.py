@@ -263,7 +263,7 @@ def getTheatreShowtimes(theatreNo, ID):
         #print theatreName
         for show in showtimeData:
             rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
-            print rawtime
+            #print rawtime
             #rawtime0='01:50'
             shour=rawtime.split(':')[0]
             sminute=rawtime.split(':')[1]
@@ -274,8 +274,8 @@ def getTheatreShowtimes(theatreNo, ID):
                 shour=int(shour[-1])
             if int(sminute)<10:
                 sminute=int(sminute[-1])
-            print shour
-            print sminute
+            #print shour
+            #print sminute
             if shour>=chour:
                 if sminute>=cminute:
                     #print 'all good boi'
@@ -313,7 +313,7 @@ def getShowInfo(state, postalCode, ID):
         showtimes.append(getTheatreShowtimes(theatre, ID))
     return showtimes
 
-rn=datetime.datetime.now()
+#rn=datetime.datetime.now()
 #print rn.hour
 #print rn.minute
 #print (time.strftime("%H:%M:%S"))
@@ -324,12 +324,12 @@ rn=datetime.datetime.now()
 
 #getNearbyZips(10282, 5)
 #getZipTheatres('new-york', 10011)
-testMovie=getNowPlaying()[0]
+#testMovie=getNowPlaying()[0]
 #idToWWM(testMovie['id'])
 #print testMovie
-theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
+#theatresPM=getTheatresPlayingMovie(testMovie['wwmRN'])
 #print theatresPM
 #print 'theatreNo: '+str(theatresPM[0])
 #print 'title: '+testMovie['name']
-getTheatreShowtimes(theatresPM[0], testMovie['id'])
+#getTheatreShowtimes(theatresPM[0], testMovie['id'])
 #getShowInfo('texas', 73301, testMovie['id'])
