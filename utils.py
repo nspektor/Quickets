@@ -126,6 +126,7 @@ def getTheatresPlayingMovie(wwm):
     theatreData=q['_embedded']['theatres']
     theatreList=[]
     for theatre in theatreData:
+        print theatre
         theatreList.append(theatre['id'])
     return theatreList
 
