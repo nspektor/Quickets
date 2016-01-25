@@ -230,10 +230,12 @@ def find_tickets():
     return render_template("find_tickets.html", showtimes=showtimes)
 
 
+#app.secret_key = "lolsup"
 if __name__=="__main__":
-    app.debug = True
+    app.debug = True 
     app.secret_key = "lolsup"
-    app.run(host='0.0.0.0',port=8000)
+   
+    app.run(host='0.0.0.0',port=5000)
 
 
 ##google maps key:AIzaSyCks4P7pW9w_neGLaRCHZnrcuwUwIppEtc
