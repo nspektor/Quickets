@@ -226,7 +226,8 @@ def getTheatreShowtimes(theatreNo, ID):
         #print theatreName
         for show in showtimeData:
             rawtime=show['showDateTimeLocal'].split('T')[1][:-3]
-            #print rawtime
+            print rawtime
+            #rawtime0='01:50'
             shour=rawtime.split(':')[0]
             sminute=rawtime.split(':')[1]
             rn=datetime.datetime.now()
@@ -236,10 +237,11 @@ def getTheatreShowtimes(theatreNo, ID):
                 shour=int(shour[-1])
             if int(sminute)<10:
                 sminute=int(sminute[-1])
-            #print shour
-            #print sminute
+            print shour
+            print sminute
             if shour>=chour:
                 if sminute>=cminute:
+                    #print 'all good boi'
                     showtimeList.append({'theatreName': theatreName, 'time': rawtime, 'avail': str(show['isSoldOut']), 'address': address, 'buy': show['purchaseUrl']})
     #print showtimeList
         return showtimeList
