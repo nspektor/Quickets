@@ -83,6 +83,7 @@ def getInfo(uname):
     FROM users
     WHERE users.username = '%s'""" % (uname)
     result = c.execute(q).fetchall()
+    print 'AAAAAAAAAAAAAAAAAAAAAAAAA'
     print result
     return result[0]
 
