@@ -32,7 +32,7 @@ var switchMovie = function switchMovie() {
     });
 };
 
-var switchMovie2 = function switchMovie2() {
+/*var switchMovie2 = function switchMovie2() {
     console.log('switchMovie2');
     $.get('/recommend', function(e) {
 	console.log('recommendin');
@@ -58,7 +58,7 @@ var switchMovie2 = function switchMovie2() {
 	console.log(movieNo2);
 	currentMovie=movieInfo[movieNo2];
     });
-};
+};*/
 
 var chooseMovie = function chooseMovie() {
     console.log('chooseMovie');
@@ -79,7 +79,7 @@ var chooseMovie = function chooseMovie() {
 		$('#shows').append('</h2>');
 		$('#shows').append('<h3>');
 		$('#shows').append(showtimeData[i][0]['address']);
-		$('#shows').append('</h3><br> <div class="containter">');
+		$('#shows').append('</h3><br> <div class="container">');
 		for (j=0; j<showtimeData[i].length; j++) {
 		    console.log('in loop2');
 		    console.log(showtimeData[i][j]['avail']);
@@ -99,12 +99,7 @@ var chooseMovie = function chooseMovie() {
 		    //$('#shows').append(showtimeData[i][j]['avail']);
 		}
 		$('#shows').append('</div><br>');
-		//showtimes.push(showtimeData[i]);
-		//console.log(showtimes[i]);
-		//$('#shows').append(showtimes[i]['avail']);
-		//$('#shows').append(showtimes[i]['theatreName']);
-		//$('#shows').append(showtimes[i]['time']);
-		//$('#shows').text(showtimes[i]['avail']);
+		
 	    }
 	    //console.log(showtimes[0]['avail']);
 	    //console.log(document.getElementById('shows'));
@@ -120,5 +115,5 @@ var chooseMovie = function chooseMovie() {
 switchMovie();
 document.getElementById("switch").addEventListener("click", switchMovie);
 document.getElementById("watch").addEventListener("click", chooseMovie);
-document.getElementById("switch2").addEventListener("click", switchMovie2);
+//document.getElementById("switch2").addEventListener("click", switchMovie2);
 console.log("stuff")

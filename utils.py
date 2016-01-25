@@ -54,7 +54,7 @@ def getNowPlaying():
     #print movieList[0]['poster']
     return movieList
 
-def getNowPlaying2(username):
+'''def getNowPlaying2(username):
     global headers
     r = requests.get("https://api.amctheatres.com/v2/movies/views/now-playing",headers=headers)
     q=r.json()
@@ -110,7 +110,7 @@ def getNowPlaying2(username):
     #print movieList[0]['genre']
     #print movieList[0]['poster']
     return movieList
-
+'''
 '''
 takes movie's wwm number
 returns list of theatre ids of theatres playing that movie
