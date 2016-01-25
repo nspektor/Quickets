@@ -74,12 +74,11 @@ var chooseMovie = function chooseMovie() {
 	    var showtimes=[];
 	    for ( i=0; i<showtimeData.length; i++) {
 		console.log('in loop1');
-		$('#shows').append('<h2>');
-		$('#shows').append(showtimeData[i][0]['theatreName']);
-		$('#shows').append('</h2>');
-		$('#shows').append('<h3>');
-		$('#shows').append(showtimeData[i][0]['address']);
-		$('#shows').append('</h3><br> <div class="container">');
+		$('#shows').append('<h2>'+showtimeData[i][0]['theatreName']+'</h2>');
+		//$('#shows').append(showtimeData[i][0]['theatreName']);
+		//$('#shows').append('</h2>');
+		$('#shows').append('<h3>'+showtimeData[i][0]['address']+'</h3>');
+		$('#shows').append('<br> <div class="container">');
 		for (j=0; j<showtimeData[i].length; j++) {
 		    console.log('in loop2');
 		    console.log(showtimeData[i][j]['avail']);
@@ -89,11 +88,11 @@ var chooseMovie = function chooseMovie() {
 		    if (showtimeData[i][j]['avail'].localeCompare('False')==0) {
 			console.log('same');
 			$('#shows').append('<a href="');
-			$('#shows').append('    '+showtimeData[i][j]['buy']);
+			$('#shows').append('<a href="'+showtimeData[i][j]['buy']+ '" class="btn btn-info" role="button">'+ showtimeData[i][j]['time'] + '</a>');
 		    }
-		    $('#shows').append('" class="btn btn-info" role="button">');
-		    $('#shows').append(showtimeData[i][j]['time']);
-		    $('#shows').append('</a>');
+		    //    $('#shows').append('" class="btn btn-info" role="button">');
+		    //$('#shows').append(showtimeData[i][j]['time']);
+		    //$('#shows').append('</a>');
 
 		    $('#shows').append('<br>');
 		    //$('#shows').append(showtimeData[i][j]['avail']);
