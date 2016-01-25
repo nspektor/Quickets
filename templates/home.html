@@ -1,21 +1,21 @@
 {% extends "layout.html" %}
 {% block title %}Quickets{% endblock %}
 {% block content %}
+<center><img src="../static/quick.png" width="200"></img></center>
 <div class="container">
   <div class="jumbotron">
     <center>
-      <h1>Welcome to Quickets</h1>
-      <h2>Last minute tickets!</h2>
+      <!--<h1>Quickets</h1>-->
       {% if loggedin %}
-      <p> hiya, {{ username }}, you're logged in </p>
+      <!--<p> hiya, {{ username }}, you're logged in </p>-->
 
-      <p id="movieName"><h3></h3></p>
+      <p style="font-size:70px;" id="movieName"><h3></h3></p>
       <div class="row">
 	<div class="col-xs-6">
-	  <img id="poster" src="" class="img-rounded" alt="poster" width="300" height="448">
+	  <img id="poster" src="" class="img-rounded" alt="poster" width="300" height="448" style="border-radius:20px">
 	</div>
 	<div class="col-xs-6">
-	  <p id="blurb"></p>
+	  <p id="blurb" style="background-color: white; padding: 20px; width:400px; height:448px; border-style: solid; border-radius:20px;"></p>
 	</div>
       </div>
       <br>
