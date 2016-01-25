@@ -52,7 +52,7 @@ def getFavorites(username):
     stories = []
     q = """SELECT users.preference
     FROM users
-    WHERE favorites.username = '%s'""" % (username)
+    WHERE users.username = '%s'""" % (username)
     result = c.execute(q).fetchall()
     return result
 
@@ -76,6 +76,12 @@ def changeFavorite(storyID, username):
         c.execute(q, (username, storyID))
     conn.commit()
 
+def getInfo(uname, data):
+    conn = sqlite3.connect("infos.db")
+    c = conn.cursor()
+    q = """SELECT users.%s
+    FROM users
+    WHERE users.username = '%s'""" % (data,username)
 
 #def getEditedFavorites(username):
 #    conn = sqlite3.connect("infos.db")
