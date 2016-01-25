@@ -2,7 +2,7 @@
 
 ##Overview
 ###An app to help you get last minute movie tickets fast!
-###Log in with your email address and zip code and see what tickets are available near you.
+###Users can create accounts, providing their State, Zipcode, and favorite movie genres and Quickets will recommend a movie that is playing near you! A user can see the move poster and synopsis and choose to either see available tickets nearby or move on to the next recommendation.
 
 ## Team Roles
 |Person            |Role           |
@@ -14,24 +14,13 @@
 
 ## Features
 * Login system
-* Save your favorite theaters under your profile
+* Save your location
 * Save your favorite genres and use those to recommend a movie
-* Map out theaters and view ticket availability
-* We show you the fastest route to the theater.
-* Calculate the time to the movie theater, given the current location, and expected turnout
-* Purchase tickets from within app.
-* AMC Theaters only, cause Fandango will only give out their API to folks who can guarantee that usage of the API will increase revenue :'(
+* Edit your account preferences
+* View showtimes and ticket availability
+* Purchase tickets
+* AMC Theaters only, because Fandango will only give out their API if it will increase their revenue
 
-## Timeline
-* 1/11/16: Frontend and some API working
-  * Login/Sign Up
-  * About w/o logging in
-  * Home dashboard
-  * Visual representation of ticket data
-  * Map/Route calculator
-* 1/19/16: API working
-  * Ticket data
-  * Upcoming movies
-  * Movie Recommenders
-* 1/24/16: Project done
+## See our project here : 192.241.244.137:8000
+
   
