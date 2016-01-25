@@ -158,7 +158,17 @@ def edit_account():
         if 'username' in session:
             loggedin = True
             username = session['username']
-            return render_template("edit_account.html",loggedin=loggedin,username=username)
+            favsdat=getFavorites(username)
+            print favsdat[0][0]
+            indlist=favsdat[0][0].split(' ')
+            print indlist
+            favs=[]
+            for ind in indlist:
+                t=str(ind)
+                print t
+                favs.append(utils.itog(t))
+            print favs
+            return render_template("edit_account.html",loggedin=loggedin,username=username, favs=favs)
         else:
             return redirect(url_for("login"))
         '''movies = utils.getNowPlaying()

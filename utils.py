@@ -15,6 +15,42 @@ ticket availability
 ordering tickets
 '''
 
+def itog(i):
+    if i=='1':
+        return 'Adventure'
+    if i=='2':
+        return 'Animation'
+    if i=='3':
+        return 'Comedy'
+    if i=='4':
+        return 'Western'
+    if i=='5':
+        return 'Special event'
+    if i=='6':
+        return 'Fantasy'
+    if i=='7':
+        return 'Musical'
+    if i=='8':
+        return 'Science fiction'
+    if i=='9':
+        return 'Film festival'
+    if i=='10':
+        return 'Suspense'
+    if i=='11':
+        return 'Family'
+    if i=='12':
+        return 'Romantic comedy'
+    if i=='13':
+        return 'Action'
+    if i=='14':
+        return 'Documentary'
+    if i=='15':
+        return 'Horror'
+    if i=='16':
+        return 'Drama'
+    else:
+        print 'wtf'
+        
 def buyTickets():
     global headers
     rn=datetime.datetime.now()
