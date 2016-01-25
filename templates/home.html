@@ -8,7 +8,7 @@
       <h2>Last minute tickets!</h2>
       {% if loggedin %}
       <p> hiya, {{ username }}, you're logged in </p>
-
+      {% else %}
       <div id="movieName"><h3></h3></div>
       <div class="row">
 	<div class="col-xs-6">
@@ -34,7 +34,7 @@
       
       <div class="container" id="shows"> </div>
       <script src="../static/mycode.js"></script>
-      {% else %}
+
       <form method = "POST">
       	<button  name = "button" type="submit" class="btn" value="login"> Log In </button>
       	<button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
