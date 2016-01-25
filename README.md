@@ -7,14 +7,15 @@
 ## Team Roles
 |Person            |Role           |
 |------------------|---------------|
-| Michael Mattson  |Frontend, pretty stuff       |
-| Nellie Spektor   |Backend, data stuff        |
-| Michael Rivera   |Middleware, ugly stuff     |
-| Mariya Gedrich   |Stuff, stuff          |
+| Michael Mattson  |Backend        |
+| Nellie Spektor   |Frontend       |
+| Michael Rivera   |Middleware     |
+| Mariya Gedrich   |Middleware     |
 
 ## Features
 * Login system
 * Save your favorite theaters under your profile
+* Save your favorite genres and use those to recommend a movie
 * Map out theaters and view ticket availability
 * We show you the fastest route to the theater.
 * Calculate the time to the movie theater, given the current location, and expected turnout
@@ -22,15 +23,15 @@
 * AMC Theaters only, cause Fandango will only give out their API to folks who can guarantee that usage of the API will increase revenue :'(
 
 ## Timeline
-* 1/11/16: Login and frontend
+* 1/11/16: Frontend and some API working
   * Login/Sign Up
   * About w/o logging in
   * Home dashboard
-  * Favorites list
   * Visual representation of ticket data
   * Map/Route calculator
-* 1/18/16: API working
-  * Route calculator
+* 1/19/16: API working
   * Ticket data
   * Upcoming movies
+  * Movie Recommenders
 * 1/24/16: Project done
+  

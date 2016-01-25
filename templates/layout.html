@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% block head %}{% endblock %}
   </head>
   <body>
     <nav class="navbar navbar-inverse">
@@ -22,11 +23,19 @@
 	<div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/home">Home</a></li>
-            <li class="active"><a href="/edit_account">Edit Account</a></li>
-          </ul>
+            {% if loggedin %}
+	    <li class="active"><a href="/edit_account">Edit Account</a></li>
+            {% endif %}
+	  </ul>
           <ul class="nav navbar-nav navbar-right">
+	    {% if loggedin %}
+	    <li><a href="/edit_account"><span class="glyphicon glyphicon-user"></span> {{ username }}</a> </li>
+	    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+	    {% else %}
             <li><a href="/create_account"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	    {% endif %}
+           
           </ul>
 	</div>
       </div>

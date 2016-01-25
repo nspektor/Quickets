@@ -6,11 +6,40 @@
     <center>
       <h1>Welcome to Quickets</h1>
       <h2>Last minute tickets!</h2>
-      <p> 1st recommended movie </p>
-      <a href="/find_tickets" class="btn btn-info" role="button">Watch Now!</a>
-      <a href="/home" class="btn btn-info" role="button">Maybe Later</a>
-      <a href="/home" class="btn btn-info" role="button">Nope</a>
-       
+      {% if loggedin %}
+      <p> hiya, {{ username }}, you're logged in </p>
+      {% else %}
+      <div id="movieName"><h3></h3></div>
+      <div class="row">
+	<div class="col-xs-6">
+	  <img id="poster" src="" class="img-rounded" alt="poster" width="300" height="448">
+	</div>
+	<div class="col-xs-6">
+	  <p id="blurb"></p>
+	</div>
+      </div>
+      <br>
+      <br>
+      <button class="btn btn-info" role="button" id="watch">Watch Now!</button>
+      <button class="btn btn-info" role="button" id="switch">Nope</button> <br>
+      <h2> theater </h2>
+      <h3> address </h3>
+      <div class="containter">
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
+      </div>
+      
+      <div class="container" id="shows"> </div>
+      <script src="../static/mycode.js"></script>
+
+      <form method = "POST">
+      	<button  name = "button" type="submit" class="btn" value="login"> Log In </button>
+      	<button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
+      </form>
+      {% endif %}
     </center>
   </div>
 </div>
