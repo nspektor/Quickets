@@ -104,21 +104,29 @@ def logout():
 @app.route("/create_account/", methods=["GET","POST"])
 def create_account():
     if request.method == "GET":
+        print 'get'
         return render_template("create_account.html")
     else:
+        print 'not get'
         #print "1"
+        print request.form
         username = request.form['username']
+        print username
     #    print "4"
         password = request.form['password']
+        print password
         zipcode = request.form['zipcode']
+        print zipcode
         state = request.form['state']
-    #    i = 1
-    #    preference = []
-    #    while i < 17:
-    #        print "2"
-    #        preference.append(request.form[str(i)])
-    #        i += 1
-    #    print "2"
+        print state
+        i = 1
+        preference = []
+        while i < 17:
+            ind=str(i)
+            if ind in request.form:
+                preference.append(request.form[ind])
+            i += 1
+        print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
             print "a"
