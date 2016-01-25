@@ -23,12 +23,12 @@ var switchMovie = function switchMovie() {
 	$('#movieName').text(name);
 	$('#blurb').text(blurb);
 	$('#poster').attr('src', poster);
+	currentMovie=movieInfo[movieNo];
 	movieNo++;
 	if(movieNo == movieInfo.length){
 	    movieNo = 0;
 	}
 	console.log(movieNo);
-	currentMovie=movieInfo[movieNo];
     });
 };
 
