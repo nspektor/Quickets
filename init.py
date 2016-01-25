@@ -13,7 +13,7 @@ q = "CREATE TABLE %s (%s)" # format string for creating tables,
                            # first formatter = name
                            # second formatter = arguments
 
-c.execute(q % ("users", "username TEXT, password TEXT, preference BLOB")) # NOTE: hex string will do fine for hash
+c.execute(q % ("users", "username TEXT, password TEXT, zipcode TEXT, state TEXT")) # NOTE: hex string will do fine for hash
 
 
 c.execute(q % ("favorites", "id INTEGER, username TEXT"))

@@ -93,17 +93,19 @@ def create_account():
     if request.method == "GET":
         return render_template("create_account.html")
     else:
-        print "1"
+        #print "1"
         username = request.form['username']
-        print "4"
+    #    print "4"
         password = request.form['password']
-        i = 1
-        preference = []
-        while i < 17:
-            print "2"
-            preference.append(request.form[str(i)])
-            i += 1
-        print "2"
+        zipcode = request.form['zipcode']
+        state = request.form['state']
+    #    i = 1
+    #    preference = []
+    #    while i < 17:
+    #        print "2"
+    #        preference.append(request.form[str(i)])
+    #        i += 1
+    #    print "2"
         if " " in username or "\t" in username:
             error = "You cannot have spaces in your username!"
             print "a"
@@ -119,7 +121,7 @@ def create_account():
         m = hashlib.md5()
         m.update(password)
         passhash = m.hexdigest()
-        if (newUser(username, passhash,preference)):
+        if (newUser(username, passhash, zipcode, state)):
             smsg = "You will be redirected to the log-in page in a moment."
             print "d"
             return redirect(url_for("login"));
