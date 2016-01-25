@@ -62,7 +62,6 @@ var switchMovie = function switchMovie() {
 
 var chooseMovie = function chooseMovie() {
     console.log('chooseMovie');
-    $('#shows').empty();
     $.ajax({
 	url: '/find_tix',
 	data: currentMovie,
