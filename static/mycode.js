@@ -88,11 +88,11 @@ var chooseMovie = function chooseMovie() {
 		    if (showtimeData[i][j]['avail'].localeCompare('False')==0) {
 			console.log('same');
 			$('#shows').append('<a href="');
-			$('#shows').append('    '+showtimeData[i][j]['buy']);
+			$('#shows').append('<a href="'+showtimeData[i][j]['buy']+ '" class="btn btn-info" role="button">'+ showtimeData[i][j]['time'] + '</a>');
 		    }
-		    $('#shows').append('" class="btn btn-info" role="button">');
-		    $('#shows').append(showtimeData[i][j]['time']);
-		    $('#shows').append('</a>');
+		    //    $('#shows').append('" class="btn btn-info" role="button">');
+		    //$('#shows').append(showtimeData[i][j]['time']);
+		    //$('#shows').append('</a>');
 
 		    $('#shows').append('<br>');
 		    //$('#shows').append(showtimeData[i][j]['avail']);

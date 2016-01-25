@@ -8,8 +8,8 @@
       <h2>Last minute tickets!</h2>
       {% if loggedin %}
       <p> hiya, {{ username }}, you're logged in </p>
-      {% else %}
-      <div id="movieName"><h3></h3></div>
+
+      <p id="movieName"><h3></h3></p>
       <div class="row">
 	<div class="col-xs-6">
 	  <img id="poster" src="" class="img-rounded" alt="poster" width="300" height="448">
@@ -32,9 +32,9 @@
 	<a href="ticketlink" class="btn btn-info" role="button">0:00</a>
       </div>
       
-      <div class="container" id="shows"> </div>
+      <p class="container" id="shows"> </p>
       <script src="../static/mycode.js"></script>
-
+      {% else %}
       <form method = "POST">
       	<button  name = "button" type="submit" class="btn" value="login"> Log In </button>
       	<button  name = "button" type="submit" class="btn" value="create_account"> Create Account </button>
