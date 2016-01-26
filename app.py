@@ -181,7 +181,7 @@ def edit_account():
                 favs.append(utils.itog(t))
                 print favs
                 return render_template("edit_account.html",loggedin=loggedin,username=username, favs=favs)
-            else:
+        else:
             return redirect(url_for("login"))
         '''movies = utils.getNowPlaying()
         movieimages = []
