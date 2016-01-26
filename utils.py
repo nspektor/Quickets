@@ -155,12 +155,21 @@ to be used with getZipTheatres to get theatres playing certain movie near person
 also returns value for use by getTheatreShowtimes and getMovieAvailability
 '''
 def getTheatresPlayingMovie(wwm):
+    theatreData=[]
     global headers
-    link="https://api.amctheatres.com/v2/theatres/views/now-playing/wwm-release-number/%d?page-size=100" % (wwm)
-    r=requests.get(link, headers=headers)
-    #print r
-    q=r.json()
-    theatreData=q['_embedded']['theatres']
+    for i in range(5):
+        print 'in for loop'
+        link="https://api.amctheatres.com/v2/theatres/views/now-playing/wwm-release-number/%d?page-size=100&page-number=%d" % (wwm,i)
+        print 'i rn is %d' %(i)
+        r=requests.get(link, headers=headers)
+        #print r
+        q=r.json()
+        print 'did the api call'
+        if len(q['_embedded']['theatres'])>0:
+            print 'length of results is %d' % (len(q['_embedded']['theatres']))
+            theatreData+=q['_embedded']['theatres']
+            #print q['_embedded']['theatres'][0]
+        print 'current lenggth of total results is %d' % (len(theatreData))
     #print theatreData
     theatreList=[]
     for theatre in theatreData:
