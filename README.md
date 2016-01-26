@@ -25,4 +25,4 @@
 ## Watch our video [Here!](https://youtu.be/MIxRIhWVPCA)
 
 
-####Note: When you press Watch Now for a movie, it can take up to few minutes to load the theater information  
+####Note: When you press Watch Now for a movie, it can take up to few minutes to load the theater information.  
