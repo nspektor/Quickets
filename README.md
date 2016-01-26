@@ -23,4 +23,6 @@
 
 ## See our project [Here!](http://192.241.244.137:8000)
 ## Watch our video [Here!](https://youtu.be/MIxRIhWVPCA)
-  
+
+
+#Note: When you press Watch Now for a movie, it can take up to few minutes to load the theater information  
