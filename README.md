@@ -21,7 +21,7 @@
 * Purchase tickets
 * AMC Theaters only, because Fandango will only give out their API if it will increase their revenue
 
-## See our project [Here!](http://192.241.244.137:8000)
+## See our project [Here!](http://quickets.chickenkiller.com:8000)
 ## Watch our video [Here!](https://youtu.be/MIxRIhWVPCA)
 
 
